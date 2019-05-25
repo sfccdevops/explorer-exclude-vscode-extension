@@ -1,4 +1,4 @@
-![Logo](https://explorer-exclude.s3.amazonaws.com/logo.png "Logo")
+![Logo](https://explorer-exclude.s3.amazonaws.com/logo.png?v=1.0.1)
 
 Explorer Exclude - VS Code Extension
 ---
@@ -17,22 +17,22 @@ Usage
 
 #### Hiding Files & Folders
 
-Right Click on any File or Folder in Explorer List to Hide Items
+Right-click on any File or Folder in Explorer List to Hide Items
 
-![explorer](https://explorer-exclude.s3.amazonaws.com/explorer.gif?v=1.0.0)
+![explorer](https://explorer-exclude.s3.amazonaws.com/explorer.gif?v=1.0.1)
 
 Select Filter Options you wish to Hide Files & Folders
 
-![picker](https://explorer-exclude.s3.amazonaws.com/picker.gif?v=1.0.0)
+![picker](https://explorer-exclude.s3.amazonaws.com/picker.gif?v=1.0.1)
 
 #### Managing Hidden Files & Folders
 
 New `HIDDEN ITEMS` Explorer Pane to Manage Hidden Files:
 
 * Click an item in the Hidden Items pane to quickly toggle its visibility
-* Right click an item to view Context Menu where you can Permanently Remove item
+* Right-click an item to view Context Menu where you can Permanently Remove item
 
-![view-pane](https://explorer-exclude.s3.amazonaws.com/view-pane.gif?v=1.0.0)
+![view-pane](https://explorer-exclude.s3.amazonaws.com/view-pane.gif?v=1.0.1)
 
 
 About Us

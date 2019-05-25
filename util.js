@@ -79,7 +79,7 @@ function getImagePath(file) {
  * @param {string} uri
  */
 function getRoot(uri) {
-    if (isMultiRoot() && vscode.workspace.workspaceFolders) {
+    if (isMultiRoot()) {
         let matchRoot = vscode.workspace.workspaceFolders.filter((wf) => {
             return isParentPath(uri.fsPath, wf.uri.fsPath);
         }).map(v => v.uri.fsPath);
@@ -127,7 +127,7 @@ function isMultiRoot() {
  * @param {integer} target
  */
 function isParentPath(source, target) {
-    return subdir(target, source);
+    return target !== '/' && subdir(target, source);
 }
 
 /**
@@ -285,15 +285,11 @@ function vscExclude(uri, callback) {
                 }
             });
 
-            if (_meta['dir']) {
-                if (_meta['ext']) {
-                    options.push(`${_meta['dir']}/*${_meta['ext']}`);
-                }
+            if (_meta['dir'] && _meta['ext']) {
+                options.push(`${_meta['dir']}/*${_meta['ext']}`);
             }
-            else {
-                if (_meta['ext']) {
-                    options.push(`*${_meta['ext']}`);
-                }
+            else if (_meta['ext']) {
+                options.push(`*${_meta['ext']}`);
             }
 
             if (_meta['base']) {

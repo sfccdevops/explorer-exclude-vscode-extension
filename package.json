@@ -1,8 +1,8 @@
 {
   "name": "explorer-exclude-vscode-extension",
   "displayName": "Explorer Exclude",
-  "version": "1.0.0",
-  "description": "Context Menu and Explorer Panel to Manage Showing & Hiding Excluded Files & Folders",
+  "version": "1.0.1",
+  "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
   "publisher": "RedVanWorkshop",
   "categories": [
@@ -25,17 +25,18 @@
     "vscode": "^1.32.0"
   },
   "keywords": [
-    "vscode",
-    "extension",
     "context-menu",
-    "explorer",
-    "workspace",
-    "panel",
     "exclude",
-    "show",
-    "hide",
+    "explorer",
     "files",
-    "folders"
+    "folders",
+    "hidden",
+    "hide",
+    "ignore",
+    "pane",
+    "show",
+    "toggle",
+    "workspace"
   ],
   "contributors": [
     {
