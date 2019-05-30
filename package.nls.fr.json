@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "Suppression de {0} des éléments masqués",
+    "error.ifExists": "{0} n'existe pas",
+    "error.parseFilePath": "{0} n'est pas disponible",
+    "package.exclude": "Ajouter aux éléments cachés ...",
+    "package.pane": "Objets Cachés",
+    "package.remove": "Supprimer des éléments cachés",
+    "package.toggle": "Basculer la visibilité",
+    "picker.placeholder": "Que voudriez-vous cacher? Sélectionnez tout ce qui s'y rapporte.",
+    "tooltip.hide": "Masquer {0}",
+    "tooltip.show": "Montrer {0}"
+}

@@ -4,6 +4,8 @@ const subdir = require('subdir');
 const util = require('util');
 const vscode = require('vscode');
 
+const { localize } = require('vscode-nls-i18n');
+
 const rootPath = vscode.workspace.rootPath;
 
 let VS_CONTEXT = null;
@@ -41,7 +43,7 @@ function deleteExclude(key, uri, callback) {
     // Remove if already set
     if (key && excludes.hasOwnProperty(key)) {
         delete excludes[key];
-        updateConfig(excludes, uri, callback, `Removed ${key} from Hidden Items`)
+        updateConfig(excludes, uri, callback, localize('config.removedKey', key))
     }
 }
 
@@ -97,7 +99,7 @@ function getRoot(uri) {
  */
 function ifExists(_path) {
     if (isUnavailable(_path)) {
-        return Promise.reject(new Error(`${_path} should has a falsy value`));
+        return Promise.reject(new Error(localize('error.ifExists', _path)));
     }
     return new Promise((res, rej) => {
         fs.access(_path, (error) => {
@@ -146,7 +148,7 @@ function isUnavailable(_path) {
 function parseFilePath(_file, _root = '') {
     return _await(this, void 0, void 0, function* () {
         if (isUnavailable(_file)) {
-            return Promise.reject(new Error(`${_file} is not available`));
+            return Promise.reject(new Error(localize('error.parseFilePath', _file)));
         }
 
         try {
@@ -183,7 +185,7 @@ function saveContext(context) {
  */
 function showPicker(items) {
     return vscode.window.showQuickPick(items, {
-        placeHolder: 'What would you like to hide? Select all that apply.',
+        placeHolder: localize('picker.placeholder'),
         canPickMany: true
     });
 }

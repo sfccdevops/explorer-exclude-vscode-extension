@@ -1,5 +1,8 @@
 const jsonc_parser = require('jsonc-parser');
 const vscode = require('vscode');
+
+const { localize } = require('vscode-nls-i18n');
+
 const util = require('./util');
 
 class ViewPane {
@@ -44,7 +47,7 @@ class ViewPane {
 
         treeItem.iconPath = util.getImagePath(icon);
         treeItem.contextValue = title;
-        treeItem.tooltip = enabled ? `Show ${title}` : `Hide ${title}`;
+        treeItem.tooltip = enabled ? localize('tooltip.show', title) : localize('tooltip.hide', title);
         treeItem.command = {
             command: 'explorer-exclude.toggle',
             title: title,

@@ -1,8 +1,12 @@
 const vscode = require('vscode');
+const { init } = require('vscode-nls-i18n');
+
 const util = require('./util');
 const ViewPane = require('./viewpane');
 
 function activate(context) {
+	init(context);
+
 	const timeout = 25;
 	const pane = new ViewPane('explorerExclude.pane.items');
 

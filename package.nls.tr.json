@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "Gizli Öğelerden {0} kaldırıldı",
+    "error.ifExists": "{0} mevcut değil",
+    "error.parseFilePath": "{0} mevcut değil",
+    "package.exclude": "Gizli Öğelere Ekle ...",
+    "package.pane": "Gizli Öğeler",
+    "package.remove": "Gizli Öğelerden Kaldır",
+    "package.toggle": "Görünürlüğü Değiştir",
+    "picker.placeholder": "Ne saklamak istersiniz? Uygun olanları seçin.",
+    "tooltip.hide": "{0} sakla",
+    "tooltip.show": "{0} göster"
+}

@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "Удалено {0} из скрытых предметов",
+    "error.ifExists": "{0} не существует",
+    "error.parseFilePath": "{0} недоступен",
+    "package.exclude": "Добавить в скрытые объекты ...",
+    "package.pane": "Скрытые предметы",
+    "package.remove": "Удалить из скрытых предметов",
+    "package.toggle": "Переключить видимость",
+    "picker.placeholder": "Что бы вы хотели скрыть? Выбрать все, что подходит.",
+    "tooltip.hide": "Скрыть {0}",
+    "tooltip.show": "Показать {0}"
+}

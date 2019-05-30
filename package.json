@@ -1,7 +1,7 @@
 {
   "name": "explorer-exclude-vscode-extension",
   "displayName": "Explorer Exclude",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
   "publisher": "RedVanWorkshop",
@@ -13,10 +13,10 @@
     "color": "#1c1c1c",
     "theme": "dark"
   },
-  "homepage": "https://github.com/redvanworkshop/explorer-exclude-vscode-extension#readme",
+  "homepage": "https://redvanworkshop.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/redvanworkshop/explorer-exclude-vscode-extension.git"
+    "url": "https://github.com/redvanworkshop/explorer-exclude-vscode-extension"
   },
   "bugs": {
     "url": "https://github.com/redvanworkshop/explorer-exclude-vscode-extension/issues"
@@ -52,44 +52,43 @@
     "onCommand:explorer-exclude.remove",
     "onCommand:explorer-exclude.toggle"
   ],
-  "main": "./extension.js",
+  "main": "./extension",
   "contributes": {
     "views": {
       "explorer": [
         {
           "id": "explorerExclude.pane.items",
-          "name": "Hidden Items"
+          "name": "%package.pane%"
         }
       ]
     },
     "commands": [
       {
         "command": "explorer-exclude.exclude",
-        "title": "Add to Hidden Items ...",
-        "category": "Explorer Exclude"
+        "title": "%package.exclude%"
       },
       {
         "command": "explorer-exclude.remove",
-        "title": "Remove from Hidden Items",
-        "category": "Explorer Exclude"
+        "title": "%package.remove%"
       },
       {
         "command": "explorer-exclude.toggle",
-        "title": "Toggle Visibility",
-        "category": "Explorer Exclude"
+        "title": "%package.toggle%"
       }
     ],
     "menus": {
       "explorer/context": [
         {
           "command": "explorer-exclude.exclude",
-          "group": "explorer-exclude@1"
+          "group": "explorer-exclude@1",
+          "when": "activeViewlet == 'workbench.view.explorer'"
         }
       ],
       "view/item/context": [
         {
           "command": "explorer-exclude.remove",
-          "group": "explorer-exclude@1"
+          "group": "explorer-exclude@1",
+          "when": "view == explorerExclude.pane.items && viewItem"
         }
       ]
     }
@@ -99,7 +98,8 @@
   },
   "dependencies": {
     "jsonc-parser": "^2.1.0",
-    "subdir": "0.0.3"
+    "subdir": "0.0.3",
+    "vscode-nls-i18n": "^0.1.1"
   },
   "devDependencies": {
     "vscode": "^1.1.34"

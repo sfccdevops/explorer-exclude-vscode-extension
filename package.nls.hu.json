@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "{0} eltávolítása a rejtett elemekből",
+    "error.ifExists": "{0} nem létezik",
+    "error.parseFilePath": "{0} nem érhető el",
+    "package.exclude": "Hozzáadás a rejtett elemekhez ...",
+    "package.pane": "Rejtett elemek",
+    "package.remove": "Eltávolítás a rejtett elemekből",
+    "package.toggle": "A láthatóság váltása",
+    "picker.placeholder": "Mit szeretne elrejteni? Válassza ki az összes alkalmazást.",
+    "tooltip.hide": "{0} elrejtése",
+    "tooltip.show": "{0} megjelenítése"
+}

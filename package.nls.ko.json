@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "숨겨진 항목에서 {0}을 (를) 제거했습니다.",
+    "error.ifExists": "{0}이 (가) 존재하지 않습니다.",
+    "error.parseFilePath": "{0}을 (를) 사용할 수 없습니다.",
+    "package.exclude": "숨겨진 항목에 추가 ...",
+    "package.pane": "숨겨진 항목",
+    "package.remove": "숨겨진 항목에서 제거",
+    "package.toggle": "공개 설정 / 해제",
+    "picker.placeholder": "무엇을 숨기시겠습니까? 해당되는 모든 것들을 고르세요.",
+    "tooltip.hide": "{0} 숨기기",
+    "tooltip.show": "{0} 표시"
+}

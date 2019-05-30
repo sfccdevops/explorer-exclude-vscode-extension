@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "從隱藏項目中刪除了{0}",
+    "error.ifExists": "{0}不存在",
+    "error.parseFilePath": "{0}不可用",
+    "package.exclude": "添加到隱藏物品...",
+    "package.pane": "隱藏物品",
+    "package.remove": "從隱藏物品中刪除",
+    "package.toggle": "切換可見性",
+    "picker.placeholder": "你想隱藏什麼？選擇所有符合條件的。",
+    "tooltip.hide": "隱藏{0}",
+    "tooltip.show": "顯示{0}"
+}

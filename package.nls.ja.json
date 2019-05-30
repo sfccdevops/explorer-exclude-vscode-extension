@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "隠しアイテムから{0}を削除しました",
+    "error.ifExists": "{0}は存在しません",
+    "error.parseFilePath": "{0}は利用できません",
+    "package.exclude": "隠しアイテムに追加...",
+    "package.pane": "隠しアイテム",
+    "package.remove": "隠しアイテムから削除",
+    "package.toggle": "可視性を切り替える",
+    "picker.placeholder": "何を隠したいですか？該当するものをすべて選択。",
+    "tooltip.hide": "{0}を非表示",
+    "tooltip.show": "{0}を表示"
+}

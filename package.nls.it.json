@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "Rimosso {0} da oggetti nascosti",
+    "error.ifExists": "{0} non esiste",
+    "error.parseFilePath": "{0} non è disponibile",
+    "package.exclude": "Aggiungi a oggetti nascosti ...",
+    "package.pane": "Oggetti nascosti",
+    "package.remove": "Rimuovi da oggetti nascosti",
+    "package.toggle": "Attiva / disattiva visibilità",
+    "picker.placeholder": "Cosa ti piacerebbe nascondere? Seleziona tutto ciò che si applica.",
+    "tooltip.hide": "Nascondi {0}",
+    "tooltip.show": "Mostra {0}"
+}

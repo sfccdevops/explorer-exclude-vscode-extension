@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "Removido {0} dos itens ocultos",
+    "error.ifExists": "{0} não existe",
+    "error.parseFilePath": "{0} não está disponível",
+    "package.exclude": "Adicionar aos itens ocultos ...",
+    "package.pane": "Itens ocultos",
+    "package.remove": "Remover de itens ocultos",
+    "package.toggle": "Alternar visibilidade",
+    "picker.placeholder": "O que você gostaria de esconder? Selecione tudo que se aplica.",
+    "tooltip.hide": "Esconder {0}",
+    "tooltip.show": "Mostrar {0}"
+}

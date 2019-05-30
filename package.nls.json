@@ -1,0 +1,12 @@
+{
+    "config.removedKey": "Removed {0} from Hidden Items",
+    "error.ifExists": "{0} does not exist",
+    "error.parseFilePath": "{0} is not available",
+    "package.exclude": "Add to Hidden Items ...",
+    "package.pane": "Hidden Items",
+    "package.remove": "Remove from Hidden Items",
+    "package.toggle": "Toggle Visibility",
+    "picker.placeholder": "What would you like to hide? Select all that apply.",
+    "tooltip.hide": "Hide {0}",
+    "tooltip.show": "Show {0}"
+}
