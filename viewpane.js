@@ -45,7 +45,10 @@ class ViewPane {
 
         let treeItem = new vscode.TreeItem(title, vscode.TreeItemCollapsibleState.None);
 
-        treeItem.iconPath = util.getImagePath(icon);
+        treeItem.iconPath = {
+            light: util.getResourcePath(icon, 'light'),
+            dark: util.getResourcePath(icon, 'dark')
+        };
         treeItem.contextValue = title;
         treeItem.tooltip = enabled ? localize('tooltip.show', title) : localize('tooltip.hide', title);
         treeItem.command = {

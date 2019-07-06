@@ -6,7 +6,11 @@
     "package.pane": "隱藏物品",
     "package.remove": "從隱藏物品中刪除",
     "package.toggle": "切換可見性",
+    "package.disableAll": "禁用所有",
+    "package.enableAll": "全部啟用",
+    "package.reset": "重置隱藏的項目",
     "picker.placeholder": "你想隱藏什麼？選擇所有符合條件的。",
     "tooltip.hide": "隱藏{0}",
-    "tooltip.show": "顯示{0}"
+    "tooltip.show": "顯示{0}",
+    "reset.prompt": "重置隱藏物品？這不能被撤消。"
 }

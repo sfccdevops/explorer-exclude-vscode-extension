@@ -6,7 +6,11 @@
     "package.pane": "Objets Cachés",
     "package.remove": "Supprimer des éléments cachés",
     "package.toggle": "Basculer la visibilité",
+    "package.disableAll": "Désactiver tous les",
+    "package.enableAll": "Activer tout",
+    "package.reset": "Réinitialiser les éléments cachés",
     "picker.placeholder": "Que voudriez-vous cacher? Sélectionnez tout ce qui s'y rapporte.",
     "tooltip.hide": "Masquer {0}",
-    "tooltip.show": "Montrer {0}"
+    "tooltip.show": "Montrer {0}",
+    "reset.prompt": "Réinitialiser les éléments cachés? Ça ne peut pas être annulé."
 }

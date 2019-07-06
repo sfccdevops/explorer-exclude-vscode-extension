@@ -6,7 +6,11 @@
     "package.pane": "隠しアイテム",
     "package.remove": "隠しアイテムから削除",
     "package.toggle": "可視性を切り替える",
+    "package.disableAll": "すべて無効にします",
+    "package.enableAll": "全て可能にする",
+    "package.reset": "隠しアイテムをリセット",
     "picker.placeholder": "何を隠したいですか？該当するものをすべて選択。",
     "tooltip.hide": "{0}を非表示",
-    "tooltip.show": "{0}を表示"
+    "tooltip.show": "{0}を表示",
+    "reset.prompt": "隠しアイテムをリセットしますか？これは、元に戻すことはできません。"
 }

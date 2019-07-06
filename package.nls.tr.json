@@ -6,7 +6,11 @@
     "package.pane": "Gizli Öğeler",
     "package.remove": "Gizli Öğelerden Kaldır",
     "package.toggle": "Görünürlüğü Değiştir",
+    "package.disableAll": "Hepsini etkisiz hale getir",
+    "package.enableAll": "Hepsini etkinleştir",
+    "package.reset": "Gizli Öğeleri Sıfırla",
     "picker.placeholder": "Ne saklamak istersiniz? Uygun olanları seçin.",
     "tooltip.hide": "{0} sakla",
-    "tooltip.show": "{0} göster"
+    "tooltip.show": "{0} göster",
+    "reset.prompt": "Gizli Öğeleri Sıfırla? Bu geri alınamaz."
 }

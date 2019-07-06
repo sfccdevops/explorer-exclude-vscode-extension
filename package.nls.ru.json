@@ -6,7 +6,11 @@
     "package.pane": "Скрытые предметы",
     "package.remove": "Удалить из скрытых предметов",
     "package.toggle": "Переключить видимость",
+    "package.disableAll": "Отключить все",
+    "package.enableAll": "Включить все",
+    "package.reset": "Сбросить скрытые предметы",
     "picker.placeholder": "Что бы вы хотели скрыть? Выбрать все, что подходит.",
     "tooltip.hide": "Скрыть {0}",
-    "tooltip.show": "Показать {0}"
+    "tooltip.show": "Показать {0}",
+    "reset.prompt": "Сбросить скрытые предметы? Это не может быть отменено."
 }

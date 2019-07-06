@@ -6,7 +6,11 @@
     "package.pane": "숨겨진 항목",
     "package.remove": "숨겨진 항목에서 제거",
     "package.toggle": "공개 설정 / 해제",
+    "package.disableAll": "모두 사용 안함",
+    "package.enableAll": "모두 사용",
+    "package.reset": "숨겨진 항목 재설정",
     "picker.placeholder": "무엇을 숨기시겠습니까? 해당되는 모든 것들을 고르세요.",
     "tooltip.hide": "{0} 숨기기",
-    "tooltip.show": "{0} 표시"
+    "tooltip.show": "{0} 표시",
+    "reset.prompt": "숨겨진 항목 재설정? 이 취소 할 수 없습니다."
 }

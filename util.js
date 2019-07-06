@@ -69,11 +69,20 @@ function getExcludes() {
 }
 
 /**
- * Get Image Path
+ * Get Resource Path
+ * @param {string} file
+ * @param {string} theme
+ */
+function getResourcePath(file, theme) {
+    return (theme) ? VS_CONTEXT.asAbsolutePath(path.join('resources', theme, file)) : VS_CONTEXT.asAbsolutePath(path.join('resources', file));
+}
+
+/**
+ * Get Root Path
  * @param {string} file
  */
-function getImagePath(file) {
-    return VS_CONTEXT.asAbsolutePath(path.join('resources', file));
+function getRootPath(file) {
+    return VS_CONTEXT.asAbsolutePath(file);
 }
 
 /**
@@ -215,6 +224,105 @@ function toggleExclude(key, callback) {
 }
 
 /**
+ * Disable All
+ * @param {function} callback
+ */
+function disableAll(callback) {
+    const config = vscode.workspace.getConfiguration('files', null);
+
+    let excludes = config.get('exclude');
+    if (!excludes) {
+        excludes = {};
+    }
+
+    for (let key in excludes) {
+        if (excludes.hasOwnProperty(key)) {
+            excludes[key] = false;
+        }
+    }
+
+    updateConfig(excludes, null, callback);
+}
+
+/**
+ * Enable All
+ * @param {function} callback
+ */
+function enableAll(callback) {
+    const config = vscode.workspace.getConfiguration('files', null);
+
+    let excludes = config.get('exclude');
+    if (!excludes) {
+        excludes = {};
+    }
+
+    for (let key in excludes) {
+        if (excludes.hasOwnProperty(key)) {
+            excludes[key] = true;
+        }
+    }
+
+    updateConfig(excludes, null, callback);
+}
+
+function toggleAll(callback) {
+    if (!rootPath || rootPath === '') {
+        return;
+    }
+
+    try {
+        const config = vscode.workspace.getConfiguration('files', null);
+
+        const excludes = config.get('exclude');
+        const backup = vscode.workspace.getConfiguration(null, null).get('explorerExclude.backup');
+
+        let newExcludes = Object.assign({}, excludes);
+
+        if (!newExcludes) {
+            newExcludes = {};
+        }
+
+        for (let key in newExcludes) {
+            if (newExcludes.hasOwnProperty(key)) {
+                newExcludes[key] = false;
+            }
+        }
+
+        let target = vscode.ConfigurationTarget.Workspace || null;
+
+        if (isMultiRoot()) {
+            const multiConfig = vscode.workspace.getConfiguration('explorerExclude', null);
+            let isExcludeFolder = multiConfig.get('folder');
+            target = isExcludeFolder ? vscode.ConfigurationTarget.WorkspaceFolder : vscode.ConfigurationTarget.Workspace;
+        }
+
+        const newBackup = (backup) ? null : excludes;
+        const newExclude = (backup) ? backup : newExcludes;
+
+        vscode.commands.executeCommand('setContext', 'explorerExclude:enabled', (backup));
+
+        config.update('exclude', newExclude, target).then(() => {
+            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', newBackup).then(() => {
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            });
+        });
+    }
+    catch (error) {
+        vscode.window.showErrorMessage(error.message || error);
+    }
+}
+
+/**
+ * Reset All
+ * @param {function} callback
+ */
+function reset(callback) {
+    updateConfig({}, null, callback);
+}
+
+/**
  * Write Exclude Updates to Config File
  * @param {object} excludes
  * @param {string} uri
@@ -237,14 +345,19 @@ function updateConfig(excludes, uri, callback, message) {
             target = isExcludeFolder ? vscode.ConfigurationTarget.WorkspaceFolder : vscode.ConfigurationTarget.Workspace;
         }
 
-        config.update('exclude', excludes, target).then(() => {
-            if (message) {
-                vscode.window.showInformationMessage(message);
-            }
+        vscode.commands.executeCommand('setContext', 'explorerExclude:enabled', true);
 
-            if (typeof callback === 'function') {
-                callback();
-            }
+        config.update('exclude', excludes, target).then(() => {
+            // Remove Backup since we made a manual change
+            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', null).then(() => {
+                if (message) {
+                    vscode.window.showInformationMessage(message);
+                }
+
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            });
         });
     }
     catch (error) {
@@ -350,11 +463,32 @@ function vscToggle (key, callback) {
     }
 }
 
+function vscToggleAll (callback) {
+    toggleAll(callback);
+}
+
+function vscDisableAll (callback) {
+    disableAll(callback);
+}
+
+function vscEnableAll (callback) {
+    enableAll(callback);
+}
+
+function vscReset (callback) {
+    reset(callback);
+}
+
 module.exports = {
     getExcludes,
-    getImagePath,
+    getResourcePath,
+    getRootPath,
     saveContext,
+    vscDisableAll,
+    vscEnableAll,
     vscExclude,
     vscRemove,
-    vscToggle
+    vscReset,
+    vscToggle,
+    vscToggleAll
 }

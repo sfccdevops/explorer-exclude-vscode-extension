@@ -6,7 +6,11 @@
     "package.pane": "Itens ocultos",
     "package.remove": "Remover de itens ocultos",
     "package.toggle": "Alternar visibilidade",
+    "package.disableAll": "Desativar tudo",
+    "package.enableAll": "Habilitar todos",
+    "package.reset": "Redefinir itens ocultos",
     "picker.placeholder": "O que você gostaria de esconder? Selecione tudo que se aplica.",
     "tooltip.hide": "Esconder {0}",
-    "tooltip.show": "Mostrar {0}"
+    "tooltip.show": "Mostrar {0}",
+    "reset.prompt": "Redefinir itens ocultos? Isto não pode ser desfeito."
 }

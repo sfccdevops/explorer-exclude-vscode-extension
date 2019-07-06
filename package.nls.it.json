@@ -6,7 +6,11 @@
     "package.pane": "Oggetti nascosti",
     "package.remove": "Rimuovi da oggetti nascosti",
     "package.toggle": "Attiva / disattiva visibilità",
+    "package.disableAll": "Disabilitare tutto",
+    "package.enableAll": "Attiva tutto",
+    "package.reset": "Reimposta elementi nascosti",
     "picker.placeholder": "Cosa ti piacerebbe nascondere? Seleziona tutto ciò che si applica.",
     "tooltip.hide": "Nascondi {0}",
-    "tooltip.show": "Mostra {0}"
+    "tooltip.show": "Mostra {0}",
+    "reset.prompt": "Reimposta elementi nascosti? Questo non può essere annullato."
 }

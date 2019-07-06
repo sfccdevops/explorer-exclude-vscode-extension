@@ -6,7 +6,11 @@
     "package.pane": "Rejtett elemek",
     "package.remove": "Eltávolítás a rejtett elemekből",
     "package.toggle": "A láthatóság váltása",
+    "package.disableAll": "Összes letiltása",
+    "package.enableAll": "Az összes engedélyezése",
+    "package.reset": "A rejtett elemek visszaállítása",
     "picker.placeholder": "Mit szeretne elrejteni? Válassza ki az összes alkalmazást.",
     "tooltip.hide": "{0} elrejtése",
-    "tooltip.show": "{0} megjelenítése"
+    "tooltip.show": "{0} megjelenítése",
+    "reset.prompt": "A rejtett elemek visszaállítása? Ezt nem lehet visszacsinálni."
 }

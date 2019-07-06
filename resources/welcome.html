@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Explorer Exclude Welcome</title>
+        <style>
+
+        body.vscode-light {
+            color: black;
+        }
+
+        body.vscode-dark {
+            color: white;
+        }
+
+        body.vscode-light h1, body.vscode-light h2 {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        body.vscode-dark h1, body.vscode-dark h2 {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        body.vscode-light blockquote {
+            border-left: 4px solid rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        body.vscode-dark blockquote {
+            border-left: 4px solid rgba(255, 255, 255, 0.75);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        article {
+            margin-bottom: 60px;
+        }
+
+        article.readme ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        article.readme li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        blockquote {
+            margin: 0;
+            padding: 6px 10px 6px 16px;
+        }
+
+        h1, h2 {
+            padding-bottom: 8px;
+        }
+        </style>
+    </head>
+    <body>
+        <article class="readme">{{README}}</article>
+
+        <article class="changelog">{{CHANGELOG}}</article>
+
+        <article class="troubleshooting">{{TROUBLESHOOTING}}</article>
+    </body>
+</html>

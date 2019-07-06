@@ -6,7 +6,11 @@
     "package.pane": "Hidden Items",
     "package.remove": "Remove from Hidden Items",
     "package.toggle": "Toggle Visibility",
+    "package.disableAll": "Disable All",
+    "package.enableAll": "Enable All",
+    "package.reset": "Reset Hidden Items",
     "picker.placeholder": "What would you like to hide? Select all that apply.",
     "tooltip.hide": "Hide {0}",
-    "tooltip.show": "Show {0}"
+    "tooltip.show": "Show {0}",
+    "reset.prompt": "Reset Hidden Items? This cannot be undone."
 }

@@ -6,7 +6,11 @@
     "package.pane": "Versteckte Gegenstände",
     "package.remove": "Aus ausgeblendeten Objekten entfernen",
     "package.toggle": "Sichtbarkeit umschalten",
+    "package.disableAll": "Alle deaktivieren",
+    "package.enableAll": "Alles aktivieren",
+    "package.reset": "Versteckte Objekte zurücksetzen",
     "picker.placeholder": "Was möchtest du verstecken? Wählen Sie alle zutreffenden.",
     "tooltip.hide": "{0} ausblenden",
-    "tooltip.show": "{0} anzeigen"
+    "tooltip.show": "{0} anzeigen",
+    "reset.prompt": "Versteckte Objekte zurücksetzen? Das kann nicht rückgängig gemacht werden."
 }

@@ -1,7 +1,7 @@
 {
   "name": "explorer-exclude-vscode-extension",
   "displayName": "Explorer Exclude",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
   "publisher": "RedVanWorkshop",
@@ -50,10 +50,28 @@
     "onView:extension",
     "onCommand:explorer-exclude.exclude",
     "onCommand:explorer-exclude.remove",
-    "onCommand:explorer-exclude.toggle"
+    "onCommand:explorer-exclude.toggle",
+    "onCommand:explorer-exclude.toggleAllOn",
+    "onCommand:explorer-exclude.toggleAllOff",
+    "onCommand:explorer-exclude.disableAll",
+    "onCommand:explorer-exclude.enableAll",
+    "onCommand:explorer-exclude.reset"
   ],
   "main": "./extension",
   "contributes": {
+    "configuration": [
+      {
+        "title": "%package.pane%",
+        "properties": {
+          "explorerExclude.backup": {
+						"type": "object",
+						"default": {},
+						"description": "Resource configuration: Configure files using glob patterns to have an empty last line always",
+						"scope": "resource"
+					}
+        }
+      }
+    ],
     "views": {
       "explorer": [
         {
@@ -74,6 +92,51 @@
       {
         "command": "explorer-exclude.toggle",
         "title": "%package.toggle%"
+      },
+      {
+        "command": "explorer-exclude.toggleAllOn",
+        "title": "%package.toggle%",
+        "category": "ExplorerExclude",
+        "icon": {
+            "dark": "resources/dark/toggle-on.svg",
+            "light": "resources/light/toggle-on.svg"
+        }
+      },
+      {
+        "command": "explorer-exclude.toggleAllOff",
+        "title": "%package.toggle%",
+        "category": "ExplorerExclude",
+        "icon": {
+            "dark": "resources/dark/toggle-off.svg",
+            "light": "resources/light/toggle-off.svg"
+        }
+      },
+      {
+        "command": "explorer-exclude.disableAll",
+        "title": "%package.disableAll%",
+        "category": "ExplorerExclude",
+        "icon": {
+            "dark": "resources/dark/unchecked.svg",
+            "light": "resources/light/unchecked.svg"
+        }
+      },
+      {
+        "command": "explorer-exclude.enableAll",
+        "title": "%package.enableAll%",
+        "category": "ExplorerExclude",
+        "icon": {
+            "dark": "resources/dark/checked.svg",
+            "light": "resources/light/checked.svg"
+        }
+      },
+      {
+        "command": "explorer-exclude.reset",
+        "title": "%package.reset%",
+        "category": "ExplorerExclude",
+        "icon": {
+            "dark": "resources/dark/reset.svg",
+            "light": "resources/light/reset.svg"
+        }
       }
     ],
     "menus": {
@@ -90,14 +153,43 @@
           "group": "explorer-exclude@1",
           "when": "view == explorerExclude.pane.items && viewItem"
         }
+      ],
+      "view/title": [
+        {
+          "command": "explorer-exclude.toggleAllOn",
+          "group": "navigation@10",
+          "when": "view == explorerExclude.pane.items && !explorerExclude:enabled"
+        },
+        {
+          "command": "explorer-exclude.toggleAllOff",
+          "group": "navigation@10",
+          "when": "view == explorerExclude.pane.items && explorerExclude:enabled"
+        },
+        {
+          "command": "explorer-exclude.disableAll",
+          "group": "navigation@10",
+          "when": "view == explorerExclude.pane.items"
+        },
+        {
+          "command": "explorer-exclude.enableAll",
+          "group": "navigation@10",
+          "when": "view == explorerExclude.pane.items"
+        },
+        {
+          "command": "explorer-exclude.reset",
+          "group": "navigation@10",
+          "when": "view == explorerExclude.pane.items"
+        }
       ]
     }
   },
   "scripts": {
-    "postinstall": "node ./node_modules/vscode/bin/install"
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "publish": "vsce package && vcse publish"
   },
   "dependencies": {
     "jsonc-parser": "^2.1.0",
+    "marked": "^0.6.2",
     "subdir": "0.0.3",
     "vscode-nls-i18n": "^0.1.1"
   },
