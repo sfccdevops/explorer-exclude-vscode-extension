@@ -185,7 +185,7 @@
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "publish": "vsce package && vcse publish"
+    "publish": "vsce package && vsce publish"
   },
   "dependencies": {
     "jsonc-parser": "^2.1.0",
