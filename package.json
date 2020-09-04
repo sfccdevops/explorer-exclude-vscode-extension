@@ -189,7 +189,7 @@
   },
   "dependencies": {
     "jsonc-parser": "^2.1.0",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "subdir": "0.0.3",
     "vscode-nls-i18n": "^0.1.1"
   },
