@@ -349,7 +349,7 @@ function updateConfig(excludes, uri, callback, message) {
 
         config.update('exclude', excludes, target).then(() => {
             // Remove Backup since we made a manual change
-            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', null).then(() => {
+            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', {}).then(() => {
                 if (message) {
                     vscode.window.showInformationMessage(message);
                 }
