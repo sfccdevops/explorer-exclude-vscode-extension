@@ -4,7 +4,7 @@
   "version": "1.2.0",
   "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
-  "publisher": "RedVanWorkshop",
+  "publisher": "SFCCDevOps",
   "categories": [
     "Other"
   ],
@@ -13,13 +13,12 @@
     "color": "#1c1c1c",
     "theme": "dark"
   },
-  "homepage": "https://redvanworkshop.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/redvanworkshop/explorer-exclude-vscode-extension"
+    "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension"
   },
   "bugs": {
-    "url": "https://github.com/redvanworkshop/explorer-exclude-vscode-extension/issues"
+    "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues"
   },
   "engines": {
     "vscode": "^1.32.0"
@@ -41,8 +40,8 @@
   "contributors": [
     {
       "name": "Peter Schmalfeldt",
-      "email": "peter@redvanworkshop.com",
-      "url": "https://redvanworkshop.com"
+      "email": "me@peterschmalfeldt.com",
+      "url": "https://peterschmalfeldt.com"
     }
   ],
   "activationEvents": [

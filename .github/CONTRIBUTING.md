@@ -1,11 +1,11 @@
-![Logo](https://explorer-exclude.s3.amazonaws.com/logo.png?v=1.0.1)
+![Logo](https://sfccdevops.s3.amazonaws.com/logo-128.png "Logo")
 
 Thank you for Contributing
 ===
 
 We want to make it as easy as possible to contribute changes.
 
-Follow the requirements below for __[Creating Issues](https://github.com/redvanworkshop/explorer-exclude-vscode-extension/issues/new)__ and __[Pull Requests](https://github.com/redvanworkshop/explorer-exclude-vscode-extension/pull/new)__, to keep everything simple for everyone :)
+Follow the requirements below for __[Creating Issues](https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues/new)__ and __[Pull Requests](https://github.com/sfccdevops/explorer-exclude-vscode-extension/pull/new)__, to keep everything simple for everyone :)
 
 <img src="https://octodex.github.com/images/dinotocat.png" width="400" />
 

@@ -1,4 +1,4 @@
-![Logo](https://explorer-exclude.s3.amazonaws.com/logo.png?v=1.2.0)
+![Logo](https://sfccdevops.s3.amazonaws.com/logo-128.png "Logo")
 
 Explorer Exclude - VS Code Extension
 ---
@@ -11,7 +11,7 @@ Explorer Exclude - VS Code Extension
 - [X] New Hidden Items Explorer Pane to Manage Hidden Items
 - [X] Works with Multiple Workspaces
 - [X] Quickly Toggle Visibility of Hidden Items
-- [X] Translactions for [VS Code Supported Locales](https://code.visualstudio.com/docs/getstarted/locales#_available-locales): _( English, Simplified Chinese, Traditional Chinese, French, German, Italian, Spanish, Japanese, Korean, Russian, Bulgarian, Hungarian, Portuguese & Turkish )_
+- [X] Translations for [VS Code Supported Locales](https://code.visualstudio.com/docs/getstarted/locales#_available-locales): _( English, Simplified Chinese, Traditional Chinese, French, German, Italian, Spanish, Japanese, Korean, Russian, Bulgarian, Hungarian, Portuguese & Turkish )_
 
 
 Usage
@@ -37,8 +37,3 @@ New `HIDDEN ITEMS` Explorer Pane to Manage Hidden Files:
 
 ![view-pane](https://explorer-exclude.s3.amazonaws.com/view-pane.gif?v=1.2.0)
 ![pane-menu](https://explorer-exclude.s3.amazonaws.com/pane-menu.gif?v=1.2.0)
-
-About Us
----
-
-[Red Van Workshop](https://redvanworkshop.com/) works with Digital Commerce Retailers who want to get things done.  Our developers enjoy publishing [Open Source](https://github.com/redvanworkshop) solutions to everyday problems.

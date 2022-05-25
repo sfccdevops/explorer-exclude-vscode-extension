@@ -13,7 +13,7 @@ function activate(context) {
 
 	/* Get Extension Version Info */
 	const currentVersion = context.globalState.get('explorer-exclude.version');
-	const packageVersion = vscode.extensions.getExtension('RedVanWorkshop.explorer-exclude-vscode-extension').packageJSON.version;
+	const packageVersion = vscode.extensions.getExtension('SFCCDevOps.explorer-exclude-vscode-extension').packageJSON.version;
 
 	/* Initialize Hidden Items Pane */
 	pane.update(util.getExcludes());
