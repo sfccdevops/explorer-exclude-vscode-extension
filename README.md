@@ -27,6 +27,10 @@ Select Filter Options you wish to Hide Files & Folders
 
 ![picker](https://explorer-exclude.s3.amazonaws.com/picker.gif?v=1.2.0)
 
+You can disable the filter option popup, and by default only allow the selected item to be hidden, by adding this setting in VSCode:
+
+`"explorerExclude.showPicker": false`
+
 #### Managing Hidden Files & Folders
 
 New `HIDDEN ITEMS` Explorer Pane to Manage Hidden Files:
