@@ -1,71 +1,375 @@
-const fs = require('fs');
-const path = require('path');
-const subdir = require('subdir');
-const util = require('util');
-const vscode = require('vscode');
+'use strict'
 
-const { localize } = require('vscode-nls-i18n');
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
+const vscode = require('vscode')
 
-const rootPath = vscode.workspace.rootPath;
+const { init, localize } = require('vscode-nls-i18n')
 
-let VS_CONTEXT = null;
+// Create custom Output Channel to Log Helpful Messages
+const output = vscode.window.createOutputChannel('Explorer Exclude')
+
+// Setup Workspace Variables
+let workspace = vscode.workspace.rootPath
+let context = null
 
 /**
  * Custom Await Method for Processing Hidden File Config
  */
-var _await = (this && this._await) || function (thisArg, _arguments, P, generator) {
+const _await =
+  (this && this._await) ||
+  function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator['throw'](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+      function fulfilled(value) {
+        try {
+          step(generator.next(value))
+        } catch (e) {
+          reject(e)
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator['throw'](value))
+        } catch (e) {
+          reject(e)
+        }
+      }
+      function step(result) {
+        result.done
+          ? resolve(result.value)
+          : new P(function (resolve) {
+              resolve(result.value)
+            }).then(fulfilled, rejected)
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next())
+    })
+  }
+
+/**
+ * Get VS Code Workspace Base
+ * @param {*} context
+ * @returns
+ */
+const getWorkspace = (context) => {
+  // Initialize Localization
+  init(context.extensionPath)
+
+  let root
+  let workspace
+
+  // Check for missing VS Code Workspace, if present, otherwise use context path
+  if (context && !vscode.workspace && !vscode.workspace.workspaceFolders) {
+    workspace = vscode.workspace.rootPath ? vscode.workspace.rootPath : path.dirname(context.fsPath)
+  } else {
+    // We have a Workspace, now let's figure out if it's single or multiroot
+    if (vscode.workspace && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length === 1) {
+      // There was only one Workspace, so we can just use it
+      root = vscode.workspace.workspaceFolders[0]
+      workspace = root && root.uri ? root.uri.fsPath : null
+    } else if (vscode.workspace && vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 1) {
+      // There is more than one Workspace, so let's grab the active one
+      if (vscode.window.activeTextEditor) {
+        // Since there is a file active, let's find the workspace from that file
+        root = vscode.workspace.workspaceFolders.find((wsFolder) => {
+          const relative = path.relative(wsFolder.uri.fsPath, vscode.window.activeTextEditor.document.uri.path)
+          return relative && !relative.startsWith('..') && !path.isAbsolute(relative)
+        })
+        workspace = root && root.uri ? root.uri.fsPath : null
+      } else {
+        // No file was open, so just grab the first available workspace
+        root = vscode.workspace.workspaceFolders[0]
+        workspace = root && root.uri ? root.uri.fsPath : null
+      }
+    } else if (context && vscode.workspace) {
+      // Something else is going on, let's see if we can still figure it out
+      try {
+        root = vscode.workspace.getWorkspaceFolder(context)
+        workspace = root && root.uri ? root.uri.fsPath : null
+      } catch (err) {
+        logger(err, 'error')
+      }
+    }
+  }
+
+  // If we did not get Workspace, let the user know
+  if (!workspace) {
+    const message = localize('debug.logger.missingWorkspace')
+    logger(message, 'error')
+    vscode.window.showErrorMessage(`${localize('extension.title')}: ${message}`)
+  }
+
+  // Debug Cartridge Path
+  logger(localize('debug.logger.workspace', workspace))
+
+  return workspace
+}
+
+/**
+ * Check if Path Exists
+ * @param {string} _path
+ */
+const ifExists = (_path) => {
+  if (isUnavailable(_path)) {
+    return Promise.reject(new Error(localize('error.ifExists', _path)))
+  }
+  return new Promise((res, rej) => {
+    fs.access(_path, (error) => {
+      if (util.isNullOrUndefined(error)) {
+        res(true)
+      } else {
+        rej(error)
+      }
+    })
+  })
+}
+
+/**
+ * Check if path is defined
+ * @param {string} _path
+ */
+const isUnavailable = (_path) => {
+  return util.isNullOrUndefined(_path) || _path === ''
+}
+
+/**
+ * Parse File Path
+ * @param {string} _file
+ * @param {string} _root
+ */
+const parseFilePath = (_file, _root = '') => {
+  return _await(this, void 0, void 0, function* () {
+    if (isUnavailable(_file)) {
+      return Promise.reject(new Error(localize('error.parseFilePath', _file)))
+    }
+
+    try {
+      yield ifExists(_file)
+
+      const ext = path.extname(_file)
+      const base = path.basename(_file)
+      const dir = path.relative(_root, path.dirname(_file))
+
+      return {
+        path: _file,
+        ext,
+        base,
+        dir,
+      }
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  })
+}
+
+/**
+ * Show Item Select Menu
+ * @param {array} items
+ */
+const showPicker = (items) => {
+  return vscode.window.showQuickPick(items, {
+    placeHolder: localize('picker.placeholder'),
+    canPickMany: true,
+  })
+}
+
+/**
+ * Write Exclude Updates to Config File
+ * @param {object} excludes
+ * @param {function} callback
+ * @param {string} message
+ */
+const updateConfig = (excludes, callback, message) => {
+  try {
+    vscode.commands.executeCommand('setContext', 'explorer-exclude.enabled', true)
+
+    // Update Main VS Code File Exclude
+    vscode.workspace
+      .getConfiguration()
+      .update('files.exclude', excludes, vscode.ConfigurationTarget.Workspace)
+      .then(() => {
+        // Remove Backup since we made a manual change
+        vscode.workspace
+          .getConfiguration()
+          .update('explorerExclude.backup', {}, vscode.ConfigurationTarget.Workspace)
+          .then(() => {
+            if (message) {
+              vscode.window.showInformationMessage(message)
+            }
+
+            if (typeof callback === 'function') {
+              callback()
+            }
+          })
+      })
+  } catch (error) {
+    logger(error, 'error')
+    vscode.window.showErrorMessage(error.message || error)
+  }
+}
 
 /**
  * Delete Key from Exclude Config
  * @param {string} key
+ * @param {function} callback
+ */
+function deleteExclude(key, callback) {
+  if (!key) {
+    return false
+  }
+
+  const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
+
+  // Remove if already set
+  if (key && Object.prototype.hasOwnProperty.call(excludes, key)) {
+    const newExcludes = Object.keys(excludes)
+      .filter((k) => k !== key)
+      .reduce((obj, k) => {
+        obj[k] = excludes[k]
+        return obj
+      }, {})
+    updateConfig(newExcludes, callback, localize('config.removedKey', key))
+  }
+}
+
+/**
+ * Disable All
+ * @param {function} callback
+ */
+function disableAll(callback) {
+  const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
+
+  for (let key in excludes) {
+    if (Object.prototype.hasOwnProperty.call(excludes, key)) {
+      excludes[key] = false
+    }
+  }
+
+  updateConfig(excludes, callback)
+}
+
+/**
+ * Enable All
+ * @param {function} callback
+ */
+function enableAll(callback) {
+  const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
+
+  for (let key in excludes) {
+    if (Object.prototype.hasOwnProperty.call(excludes, key)) {
+      excludes[key] = true
+    }
+  }
+
+  updateConfig(excludes, callback)
+}
+
+/**
+ * VS Code Action - Handle Mapping URI Exclusion to possible Regex Pattern Matches
  * @param {string} uri
  * @param {function} callback
  */
-function deleteExclude(key, uri, callback) {
-    if (!key) {
-        return false;
-    }
+function exclude(uri, callback) {
+  return _await(this, void 0, void 0, function* () {
+    try {
+      const _path = uri.fsPath
+      const _root = workspace
+      const _meta = yield parseFilePath(_path, _root)
 
-    const config = vscode.workspace.getConfiguration('files', null);
+      let selections
+      let options = []
 
-    let excludes = config.get('exclude');
-    if (!excludes) {
-        excludes = {};
-    }
+      let _showPicker = vscode.workspace.getConfiguration().get('explorerExclude.showPicker', vscode.ConfigurationTarget.Workspace)
+      if (typeof _showPicker == 'undefined') {
+        _showPicker = true
+      }
 
-    // Remove if already set
-    if (key && excludes.hasOwnProperty(key)) {
-        delete excludes[key];
-        updateConfig(excludes, uri, callback, localize('config.removedKey', key))
+      logger(`USING PICKER: ${_showPicker ? 'YES' : 'NO'}`, 'debug')
+
+      if (_showPicker) {
+        Object.keys(_meta).forEach((key) => {
+          let regex = undefined
+          switch (key) {
+            case 'path':
+              break
+            case 'ext':
+              regex = _meta[key] ? `**${path.sep}*${_meta[key]}` : undefined
+              break
+            case 'base':
+              regex = _meta[key]
+              break
+            case 'dir':
+              if (_showPicker) regex = _meta[key] ? `${_meta[key] + path.sep}*.*` : undefined
+              break
+          }
+          if (regex) {
+            options.push(regex)
+          }
+        })
+
+        if (_meta['dir'] && _meta['ext']) {
+          options.push(`${_meta['dir']}${path.sep}*${_meta['ext']}`)
+        } else if (_meta['ext']) {
+          options.push(`*${_meta['ext']}`)
+        }
+
+        if (_meta['base']) {
+          options.push(`**${path.sep}${_meta['base']}`)
+          if (_meta['dir']) {
+            options.push(`${_meta['dir']}${path.sep}${_meta['base']}`)
+          }
+        }
+
+        selections = yield showPicker(options.reverse())
+      } else {
+        selections = [path.relative(_root, uri.fsPath)]
+      }
+
+      if (selections && selections.length > 0) {
+        const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
+
+        logger('CURRENT EXCLUDES:', 'debug')
+        logger(excludes)
+
+        logger('ADDING EXCLUDE:', 'debug')
+        logger(selections)
+
+        try {
+          const newExcludes = Object.assign({}, excludes)
+          Array.from(new Set(selections))
+            .filter((v) => v !== '*')
+            .forEach((rule) => {
+              newExcludes[rule] = true
+            })
+          updateConfig(newExcludes, callback)
+        } catch (error) {
+          vscode.window.showErrorMessage(error.message || error)
+        }
+      }
+    } catch (error) {
+      vscode.window.showErrorMessage(error.message || error)
     }
+  })
 }
 
 /**
  * Get Excluded Fils
  */
 function getExcludes() {
-    if (!rootPath || rootPath === '') {
-        return [];
-    }
+  if (!workspace || workspace === '') {
+    return []
+  }
 
-    const config = vscode.workspace.getConfiguration('files', null);
-    const excludes = config.get('exclude');
+  const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
 
-    let list =  excludes ? Object.keys(config.get('exclude')) : [];
+  let list = excludes ? Object.keys(excludes) : []
 
-    for (let i = 0; i < list.length; i++) {
-        let enabled = (excludes[list[i]]) ? 1 : 0;
-        list[i] = `${list[i]}|${enabled}`
-    }
+  for (let i = 0; i < list.length; i++) {
+    let enabled = excludes[list[i]] ? 1 : 0
+    list[i] = `${list[i]}|${enabled}`
+  }
 
-    return list;
+  return list
 }
 
 /**
@@ -74,7 +378,7 @@ function getExcludes() {
  * @param {string} theme
  */
 function getResourcePath(file, theme) {
-    return (theme) ? VS_CONTEXT.asAbsolutePath(path.join('resources', theme, file)) : VS_CONTEXT.asAbsolutePath(path.join('resources', file));
+  return theme ? context.asAbsolutePath(path.join('extension', 'resources', theme, file)) : context.asAbsolutePath(path.join('extension', 'resources', file))
 }
 
 /**
@@ -82,121 +386,108 @@ function getResourcePath(file, theme) {
  * @param {string} file
  */
 function getRootPath(file) {
-    return VS_CONTEXT.asAbsolutePath(file);
+  return context.asAbsolutePath(file)
 }
 
 /**
- * Get Root Workspace Directory
- * @param {string} uri
+ * Log output to "SFCC Cartridge Overrides" Output Terminal
+ * @param {String} message Debug Message
+ * @param {String} type Debug Type
  */
-function getRoot(uri) {
-    if (isMultiRoot()) {
-        let matchRoot = vscode.workspace.workspaceFolders.filter((wf) => {
-            return isParentPath(uri.fsPath, wf.uri.fsPath);
-        }).map(v => v.uri.fsPath);
+function logger(message, type) {
+  let icon = ''
 
-        return matchRoot[0];
-    }
-    else {
-        return rootPath || '';
-    }
+  // Convert message to String if it was not already
+  if (typeof message !== 'string') {
+    message = JSON.stringify(message, null, 2)
+  }
+
+  // Prefix Logger Messages with Icons
+  if (type === 'debug') {
+    icon = '› '
+  } else if (type === 'error') {
+    icon = '✖ '
+  } else if (type === 'success') {
+    icon = '✔ '
+  } else if (type === 'warn') {
+    icon = '⚠ '
+  }
+
+  // Write Output to Terminal
+  output.appendLine(`${icon}${message}`)
 }
 
 /**
- * Check if Path Exists
- * @param {string} _path
+ * Reset All
+ * @param {function} callback
  */
-function ifExists(_path) {
-    if (isUnavailable(_path)) {
-        return Promise.reject(new Error(localize('error.ifExists', _path)));
-    }
-    return new Promise((res, rej) => {
-        fs.access(_path, (error) => {
-            if (util.isNullOrUndefined(error)) {
-                res(true);
-            }
-            else {
-                rej(error);
-            }
-        });
-    });
-}
-
-/**
- * Check if this is a Multi Root Workspace
- */
-function isMultiRoot() {
-    if (vscode.workspace.workspaceFolders) {
-        return vscode.workspace.workspaceFolders.length > 1;
-    }
-    return false;
-}
-
-/**
- * Check if Path is a Parent Directory
- * @param {string} source
- * @param {integer} target
- */
-function isParentPath(source, target) {
-    return target !== '/' && subdir(target, source);
-}
-
-/**
- * Check if path is defined
- * @param {string} _path
- */
-function isUnavailable(_path) {
-    return util.isNullOrUndefined(_path) || _path === '';
-}
-
-/**
- * Parse File Path
- * @param {string} _file
- * @param {string} rootPath
- */
-function parseFilePath(_file, _root = '') {
-    return _await(this, void 0, void 0, function* () {
-        if (isUnavailable(_file)) {
-            return Promise.reject(new Error(localize('error.parseFilePath', _file)));
-        }
-
-        try {
-            yield ifExists(_file);
-
-            const ext = path.extname(_file);
-            const base = path.basename(_file);
-            const dir = path.relative(_root, path.dirname(_file));
-
-            return {
-                path: _file,
-                ext,
-                base,
-                dir
-            };
-        }
-        catch (error) {
-            return Promise.reject(error);
-        }
-    });
+function reset(callback) {
+  updateConfig(
+    {
+      '**/.git': true,
+      '**/.svn': true,
+      '**/.hg': true,
+      '**/CVS': true,
+      '**/.DS_Store': true,
+      '**/Thumbs.db': true,
+      '**/*.git': true,
+    },
+    callback
+  )
 }
 
 /**
  * Save VS Code Context for Pane Reference
- * @param {object} context
+ * @param {object} _context
  */
-function saveContext(context) {
-    VS_CONTEXT = context;
+function saveContext(_context) {
+  context = _context
+  workspace = getWorkspace(_context)
 }
 
 /**
- * Show Item Select Menu
- * @param {array} items
+ * Toggle All Excludes
+ * @param {Function} callback Callback Command
  */
-function showPicker(items) {
-    return vscode.window.showQuickPick(items, {
-        placeHolder: localize('picker.placeholder'),
-        canPickMany: true
-    });
+function toggleAll(callback) {
+  try {
+    const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace)
+    const backup = vscode.workspace.getConfiguration().get('explorerExclude.backup', vscode.ConfigurationTarget.Workspace)
+    const restore = JSON.stringify(backup) !== '{}'
+
+    let newExcludes = Object.assign({}, excludes)
+
+    if (!newExcludes) {
+      newExcludes = {}
+    }
+
+    for (let key in newExcludes) {
+      if (Object.prototype.hasOwnProperty.call(newExcludes, key)) {
+        newExcludes[key] = false
+      }
+    }
+
+    const newBackup = restore ? {} : excludes
+    const newExclude = restore ? backup : newExcludes
+
+    vscode.commands.executeCommand('setContext', 'explorer-exclude.enabled', restore)
+
+    vscode.workspace
+      .getConfiguration()
+      .update('files.exclude', newExclude, vscode.ConfigurationTarget.Workspace)
+      .then(() => {
+        vscode.workspace
+          .getConfiguration()
+          .update('explorerExclude.backup', newBackup, vscode.ConfigurationTarget.Workspace)
+          .then(() => {
+            if (typeof callback === 'function') {
+              callback()
+            }
+          })
+      })
+  } catch (error) {
+    vscode.window.showErrorMessage(error.message || error)
+  }
 }
 
 /**
@@ -205,300 +496,31 @@ function showPicker(items) {
  * @param {function} callback
  */
 function toggleExclude(key, callback) {
-    if (!key) {
-        return false;
-    }
+  if (!key) {
+    return false
+  }
 
-    const config = vscode.workspace.getConfiguration('files', null);
+  const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
 
-    let excludes = config.get('exclude');
-    if (!excludes) {
-        excludes = {};
-    }
-
-    // Invert Selection
-    if (key && excludes.hasOwnProperty(key)) {
-        excludes[key] = !(excludes[key]);
-        updateConfig(excludes, key, callback);
-    }
-}
-
-/**
- * Disable All
- * @param {function} callback
- */
-function disableAll(callback) {
-    const config = vscode.workspace.getConfiguration('files', null);
-
-    let excludes = config.get('exclude');
-    if (!excludes) {
-        excludes = {};
-    }
-
-    for (let key in excludes) {
-        if (excludes.hasOwnProperty(key)) {
-            excludes[key] = false;
-        }
-    }
-
-    updateConfig(excludes, null, callback);
-}
-
-/**
- * Enable All
- * @param {function} callback
- */
-function enableAll(callback) {
-    const config = vscode.workspace.getConfiguration('files', null);
-
-    let excludes = config.get('exclude');
-    if (!excludes) {
-        excludes = {};
-    }
-
-    for (let key in excludes) {
-        if (excludes.hasOwnProperty(key)) {
-            excludes[key] = true;
-        }
-    }
-
-    updateConfig(excludes, null, callback);
-}
-
-function toggleAll(callback) {
-    if (!rootPath || rootPath === '') {
-        return;
-    }
-
-    try {
-        const config = vscode.workspace.getConfiguration('files', null);
-
-        const excludes = config.get('exclude');
-        const backup = vscode.workspace.getConfiguration(null, null).get('explorerExclude.backup');
-
-        let newExcludes = Object.assign({}, excludes);
-
-        if (!newExcludes) {
-            newExcludes = {};
-        }
-
-        for (let key in newExcludes) {
-            if (newExcludes.hasOwnProperty(key)) {
-                newExcludes[key] = false;
-            }
-        }
-
-        let target = vscode.ConfigurationTarget.Workspace || null;
-
-        if (isMultiRoot()) {
-            const multiConfig = vscode.workspace.getConfiguration('explorerExclude', null);
-            let isExcludeFolder = multiConfig.get('folder');
-            target = isExcludeFolder ? vscode.ConfigurationTarget.WorkspaceFolder : vscode.ConfigurationTarget.Workspace;
-        }
-
-        const newBackup = (backup) ? null : excludes;
-        const newExclude = (backup) ? backup : newExcludes;
-
-        vscode.commands.executeCommand('setContext', 'explorerExclude:enabled', (backup));
-
-        config.update('exclude', newExclude, target).then(() => {
-            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', newBackup).then(() => {
-                if (typeof callback === 'function') {
-                    callback();
-                }
-            });
-        });
-    }
-    catch (error) {
-        vscode.window.showErrorMessage(error.message || error);
-    }
-}
-
-/**
- * Reset All
- * @param {function} callback
- */
-function reset(callback) {
-    updateConfig({}, null, callback);
-}
-
-/**
- * Write Exclude Updates to Config File
- * @param {object} excludes
- * @param {string} uri
- * @param {function} callback
- * @param {string} message
- */
-function updateConfig(excludes, uri, callback, message) {
-    if (!rootPath || rootPath === '') {
-        return;
-    }
-
-    try {
-        const config = vscode.workspace.getConfiguration('files', null);
-
-        let target = vscode.ConfigurationTarget.Workspace || null;
-
-        if (isMultiRoot()) {
-            const multiConfig = vscode.workspace.getConfiguration('explorerExclude', uri);
-            let isExcludeFolder = multiConfig.get('folder');
-            target = isExcludeFolder ? vscode.ConfigurationTarget.WorkspaceFolder : vscode.ConfigurationTarget.Workspace;
-        }
-
-        vscode.commands.executeCommand('setContext', 'explorerExclude:enabled', true);
-
-        config.update('exclude', excludes, target).then(() => {
-            // Remove Backup since we made a manual change
-            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', {}).then(() => {
-                if (message) {
-                    vscode.window.showInformationMessage(message);
-                }
-
-                if (typeof callback === 'function') {
-                    callback();
-                }
-            });
-        });
-    }
-    catch (error) {
-        vscode.window.showErrorMessage(error.message || error);
-    }
-}
-
-/**
- * VS Code Action - Handle Mapping URI Exclusion to possible Regex Pattern Matches
- * @param {string} uri
- * @param {function} callback
- */
-function vscExclude(uri, callback) {
-    return _await(this, void 0, void 0, function* () {
-        try {
-            const _path = uri.fsPath;
-            const _root = getRoot(uri) || '';
-            const _meta = (yield parseFilePath(_path, _root));
-
-            let selections;
-            let options = [];
-
-            const _showPicker = vscode.workspace.getConfiguration(null, null).get('explorerExclude.showPicker');
-            if (typeof _showPicker == 'undefined')
-                _showPicker = true;
-
-            if (_showPicker) {
-                Object.keys(_meta).forEach(key => {
-                    let regex = undefined;
-                    switch (key) {
-                        case 'path':
-                            break;
-                        case 'ext':
-                                regex = _meta[key] ? `**/*${_meta[key]}` : undefined;
-                            break;
-                        case 'base':
-                            regex = _meta[key];
-                            break;
-                        case 'dir':
-                            if (_showPicker)
-                                regex = _meta[key] ? `${_meta[key] + '/'}*.*` : undefined;
-                            break;
-                    }
-                    if (regex) {
-                        options.push(regex);
-                    }
-                });
-
-                if (_meta['dir'] && _meta['ext']) {
-                    options.push(`${_meta['dir']}/*${_meta['ext']}`);
-                }
-                else if (_meta['ext']) {
-                    options.push(`*${_meta['ext']}`);
-                }
-
-                if (_meta['base']) {
-                    options.push(`**/${_meta['base']}`);
-                    if (_meta['dir']) {
-                        options.push(`${_meta['dir']}/${_meta['base']}`);
-                    }
-                }
-
-                selections = yield showPicker(options.reverse());
-            } else {
-                if (_meta['base'])
-                    selections = [_meta['base']];
-            }
-
-            if (selections && selections.length > 0) {
-                const config = vscode.workspace.getConfiguration('files', null);
-
-                let excludes = config.get('exclude');
-                if (!excludes) {
-                    excludes = {};
-                }
-
-                try {
-                    Array.from(new Set(selections)).filter(v => v !== '*').forEach((rule) => { excludes[rule] = true; });
-                    updateConfig(excludes, uri, callback);
-                }
-                catch (error) {
-                    vscode.window.showErrorMessage(error.message || error);
-                }
-            }
-        }
-        catch (error) {
-            vscode.window.showErrorMessage(error.message || error);
-        }
-    });
-}
-
-/**
- * VS Code Action - Remove item from Excluded Patterns
- * @param {*} item
- * @param {*} callback
- */
-function vscRemove (item, callback) {
-    if (item && item.value) {
-        const value = item.value;
-        const title = value.substring(0, value.length - 2);
-        deleteExclude(title, null, callback);
-    }
-}
-
-/**
- * VS Code Action - Tiggle Visibility of item from Excluded Patterns
- * @param {*} key
- * @param {*} callback
- */
-function vscToggle (key, callback) {
-    if (key) {
-        toggleExclude(key, callback);
-    }
-}
-
-function vscToggleAll (callback) {
-    toggleAll(callback);
-}
-
-function vscDisableAll (callback) {
-    disableAll(callback);
-}
-
-function vscEnableAll (callback) {
-    enableAll(callback);
-}
-
-function vscReset (callback) {
-    reset(callback);
+  // Invert Selection
+  if (key && Object.prototype.hasOwnProperty.call(excludes, key)) {
+    logger(`TOGGLE: ${excludes[key] ? 'OFF' : 'ON'}`, 'debug')
+    excludes[key] = !excludes[key]
+    updateConfig(excludes, callback)
+  }
 }
 
 module.exports = {
-    getExcludes,
-    getResourcePath,
-    getRootPath,
-    saveContext,
-    vscDisableAll,
-    vscEnableAll,
-    vscExclude,
-    vscRemove,
-    vscReset,
-    vscToggle,
-    vscToggleAll
+  deleteExclude,
+  disableAll,
+  enableAll,
+  exclude,
+  getExcludes,
+  getResourcePath,
+  getRootPath,
+  logger,
+  reset,
+  saveContext,
+  toggleAll,
+  toggleExclude,
 }

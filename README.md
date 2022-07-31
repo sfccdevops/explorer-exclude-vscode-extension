@@ -3,7 +3,7 @@
 Explorer Exclude - VS Code Extension
 ---
 
-> Context Menu and Explorer Panel to Manage Showing & Hiding Excluded Files & Folders ( for VS Code version 1.32 or newer )
+> Context Menu and Explorer Panel to Manage Showing & Hiding Excluded Files & Folders ( for VS Code version 1.60 or newer )
 
 ![screenshot](https://explorer-exclude.s3.amazonaws.com/screenshot.png?v=1.3.0)
 
@@ -12,7 +12,6 @@ Explorer Exclude - VS Code Extension
 - [X] Works with Multiple Workspaces
 - [X] Quickly Toggle Visibility of Hidden Items
 - [X] Translations for [VS Code Supported Locales](https://code.visualstudio.com/docs/getstarted/locales#_available-locales): _( English, Simplified Chinese, Traditional Chinese, French, German, Italian, Spanish, Japanese, Korean, Russian, Bulgarian, Hungarian, Portuguese & Turkish )_
-
 
 Usage
 ---
@@ -41,3 +40,20 @@ New `HIDDEN ITEMS` Explorer Pane to Manage Hidden Files:
 
 ![view-pane](https://explorer-exclude.s3.amazonaws.com/view-pane.gif?v=1.3.0)
 ![pane-menu](https://explorer-exclude.s3.amazonaws.com/pane-menu.gif?v=1.3.0)
+
+Need Help?
+---
+
+> Check out or Troubleshooting Page for help with any known issues or report new ones.
+
+[![Create Issue](https://img.shields.io/badge/Get_Help-Troubleshooting-red.svg?style=for-the-badge&logo=github&logoColor=ffffff&logoWidth=16)](https://github.com/sfccdevops/explorer-exclude-vscode-extension/blob/develop/TROUBLESHOOTING.md)
+
+About the Author
+---
+
+> [Peter Schmalfeldt](https://peterschmalfeldt.com/) is a Certified Senior Salesforce Commerce Cloud Developer with over 20 years of experience building eCommerce websites, providing everything you need to design, develop & deploy eCommerce applications for Web, Mobile & Desktop platforms.
+
+Disclaimer
+---
+
+> The trademarks and product names of Salesforce®, including the mark Salesforce®, are the property of Salesforce.com. SFCC DevOps is not affiliated with Salesforce.com, nor does Salesforce.com sponsor or endorse the SFCC DevOps products or website. The use of the Salesforce® trademark on this project does not indicate an endorsement, recommendation, or business relationship between Salesforce.com and SFCC DevOps.
