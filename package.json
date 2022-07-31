@@ -1,14 +1,15 @@
 {
   "name": "explorer-exclude-vscode-extension",
   "displayName": "Explorer Exclude",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
   "publisher": "SFCCDevOps",
   "categories": [
     "Other"
   ],
-  "icon": "resources/icon.png",
+  "main": "extension/index.js",
+  "icon": "extension/resources/icon.png",
   "galleryBanner": {
     "color": "#1c1c1c",
     "theme": "dark"
@@ -21,7 +22,8 @@
     "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues"
   },
   "engines": {
-    "vscode": "^1.32.0"
+    "vscode": "^1.60.0",
+    "node": "^14.19.0"
   },
   "keywords": [
     "context-menu",
@@ -56,7 +58,6 @@
     "onCommand:explorer-exclude.enableAll",
     "onCommand:explorer-exclude.reset"
   ],
-  "main": "./extension",
   "contributes": {
     "configuration": [
       {
