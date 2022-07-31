@@ -63,7 +63,7 @@
         "title": "%package.pane%",
         "properties": {
           "explorerExclude.backup": {
-						"type": "object",
+						"type": ["object","null"],
 						"default": {},
 						"description": "Resource configuration: Configure files using glob patterns to have an empty last line always",
 						"scope": "resource"
