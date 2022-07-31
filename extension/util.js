@@ -349,7 +349,7 @@ function updateConfig(excludes, uri, callback, message) {
 
         config.update('exclude', excludes, target).then(() => {
             // Remove Backup since we made a manual change
-            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', null).then(() => {
+            vscode.workspace.getConfiguration(null, null).update('explorerExclude.backup', {}).then(() => {
                 if (message) {
                     vscode.window.showInformationMessage(message);
                 }
@@ -380,41 +380,51 @@ function vscExclude(uri, callback) {
             let selections;
             let options = [];
 
-            Object.keys(_meta).forEach(key => {
-                let regex = undefined;
-                switch (key) {
-                    case 'path':
-                        break;
-                    case 'ext':
-                        regex = _meta[key] ? `**/*${_meta[key]}` : undefined;
-                        break;
-                    case 'base':
-                        regex = _meta[key];
-                        break;
-                    case 'dir':
-                        regex = _meta[key] ? `${_meta[key] + '/'}*.*` : undefined;
-                        break;
-                }
-                if (regex) {
-                    options.push(regex);
-                }
-            });
+            const _showPicker = vscode.workspace.getConfiguration(null, null).get('explorerExclude.showPicker');
+            if (typeof _showPicker == 'undefined')
+                _showPicker = true;
 
-            if (_meta['dir'] && _meta['ext']) {
-                options.push(`${_meta['dir']}/*${_meta['ext']}`);
-            }
-            else if (_meta['ext']) {
-                options.push(`*${_meta['ext']}`);
-            }
+            if (_showPicker) {
+                Object.keys(_meta).forEach(key => {
+                    let regex = undefined;
+                    switch (key) {
+                        case 'path':
+                            break;
+                        case 'ext':
+                                regex = _meta[key] ? `**/*${_meta[key]}` : undefined;
+                            break;
+                        case 'base':
+                            regex = _meta[key];
+                            break;
+                        case 'dir':
+                            if (_showPicker)
+                                regex = _meta[key] ? `${_meta[key] + '/'}*.*` : undefined;
+                            break;
+                    }
+                    if (regex) {
+                        options.push(regex);
+                    }
+                });
 
-            if (_meta['base']) {
-                options.push(`**/${_meta['base']}`);
-                if (_meta['dir']) {
-                    options.push(`${_meta['dir']}/${_meta['base']}`);
+                if (_meta['dir'] && _meta['ext']) {
+                    options.push(`${_meta['dir']}/*${_meta['ext']}`);
                 }
-            }
+                else if (_meta['ext']) {
+                    options.push(`*${_meta['ext']}`);
+                }
 
-            selections = yield showPicker(options.reverse());
+                if (_meta['base']) {
+                    options.push(`**/${_meta['base']}`);
+                    if (_meta['dir']) {
+                        options.push(`${_meta['dir']}/${_meta['base']}`);
+                    }
+                }
+
+                selections = yield showPicker(options.reverse());
+            } else {
+                if (_meta['base'])
+                    selections = [_meta['base']];
+            }
 
             if (selections && selections.length > 0) {
                 const config = vscode.workspace.getConfiguration('files', null);
