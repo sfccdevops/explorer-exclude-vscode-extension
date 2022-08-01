@@ -3,6 +3,21 @@ Troubleshooting
 
 > This document contains a list of known issues, and how to solve them.
 
+`Nothing Shows Up After Update`
+---
+
+This can happen if you had the extension installed before.  To fix this:
+
+1. Switch to `Extensions` in Left Column
+2. Look for `Explorer Exclude`
+3. Check to see if it has a `Reload Required` button, it if does, click it ( extension will not work until you do )
+
+If that was not the case, you may need:
+
+1. Uninstall `Explorer Exclude` Extension
+2. Restart VS Code
+3. Reinstall `Explorer Exclude` Extension
+
 `Unable to install Extension`
 ---
 
