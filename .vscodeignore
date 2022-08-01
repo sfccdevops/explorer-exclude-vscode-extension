@@ -1,0 +1,12 @@
+.vscode/**
+.gitignore
+.github
+.editorconfig
+.eslintrc.js
+.gitattributes
+.gitignore
+.nvmrc
+*.vsix
+*.code-workspace
+DEVELOPERS.md
+TROUBLESHOOTING.md

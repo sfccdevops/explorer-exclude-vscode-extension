@@ -1,4 +1,6 @@
-*.vsix
-*.code-workspace
-node_modules
+!.nvmrc
 .vscode/settings.json
+*.code-workspace
+*.vsix
+node_modules
+!extension.code-workspace

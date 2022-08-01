@@ -1,33 +1,31 @@
-#### What's this PR do?
+Overview
+---
 
-_[write_something]_
+TEXT
 
-#### Where should the reviewer start?
+Reviewer
+---
 
-_[write_something]_
+> Where should the reviewer start? How to Test? Background Context? etc ( required )
 
-#### How should this be manually tested?
+TEXT
 
-_[write_something]_
+Checklist
+---
 
-#### Any background context you want to provide?
+> I have tested each of the following, and they work as expected: ( required )
 
-_[write_something]_
+- [ ] Meets [Contributing Guide](https://github.com/sfccdevops/explorer-exclude-vscode-extension/blob/develop/.github/CONTRIBUTING.md) Requirements
+- [ ] Pulled in the Latest Code from the `develop` branch
+- [ ] Works on a Desktop / Laptop Device
 
-#### What are the relevant github issue?
+Documentation
+---
 
-_[write_something]_
+> Screenshots, Attachments, Linked GitHub Issues, etc ( optional )
 
-#### Screenshots (if appropriate)
 
-_[drag_and_drop_here]_
 
-#### What gif best describes this PR or how it makes you feel?
+#### What GIF best describes this PR or how it makes you feel?
 
-_[drag_and_drop_something_fun_here]_
-
-#### Definition of Done:
-
-- [ ] You have actually run this locally and can verify it works
-- [ ] You have verified that `npm test` passes without issue
-- [ ] You have updated the README file (if appropriate)
+> Drag & Drop Something Fun Here ( optional )

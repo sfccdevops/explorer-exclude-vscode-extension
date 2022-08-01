@@ -1,27 +1,52 @@
-![Logo](https://sfccdevops.s3.amazonaws.com/logo-128.png "Logo")
-
-Thank you for Contributing
+Contributing Guide
 ===
 
-We want to make it as easy as possible to contribute changes.
-
-Follow the requirements below for __[Creating Issues](https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues/new)__ and __[Pull Requests](https://github.com/sfccdevops/explorer-exclude-vscode-extension/pull/new)__, to keep everything simple for everyone :)
-
-<img src="https://octodex.github.com/images/dinotocat.png" width="400" />
-
-Creating an Issue
+Issues & Feature Requests
 ---
 
-Use the Prepopulated Template that we provide.  Issues reported that do not use the template will be rejected.
+[![Create Issue](https://img.shields.io/badge/Github-Create_Issue-red.svg?style=for-the-badge&logo=github&logoColor=ffffff&logoWidth=16)](https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues/new/choose)
 
+### Bug Fix
 
-Creating a Pull Request
+> We're sorry things are not working as expected, and want to get things fixed ASAP. In order to help us do that, we need a few things from you.
+
+1. Create a [New Issue](https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues/new/choose)
+2. Enter a Short but Descriptive Title for the Issue
+3. Use the Template Provided and fill in as much as you can, if something does not apply, enter `N/A`
+4. Look for the `Labels` section, and select `Bug Report` from the drop down menu
+5. Click `Submit new issue` button
+
+### Feature Request
+
+> Got an idea for a new feature? We'd love to hear it! In order to get this knocked out, we will need a few things from you.
+
+1. Create a [New Issue](https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues/new/choose)
+2. Enter a Short but Descriptive Title for the Feature Request
+3. Use the Template Provided and fill in as much as you can, if something does not apply, enter `N/A` ( you can delete the `Steps to Duplicate:` section as that does not apply )
+4. Look for the `Labels` section, and select `Feature Request` from the drop down menu
+5. Click `Submit new issue` button
+
+Pull Requests
 ---
 
-Before you can submit a PR, you will need to:
+[![Create Pull Request](https://img.shields.io/badge/Github-Create_Pull_Request-blue.svg?style=for-the-badge&logo=github&logoColor=ffffff&logoWidth=16)](https://github.com/sfccdevops/explorer-exclude-vscode-extension/compare)
 
-1. Make a New Branch off of `master` ( ideally you will name your branch for the issue you are fixing, e,g, `issue-3-fix-menu` )
-2. Commit & Push your New Branch, with a comment like `Fixes #3` to auto trigger a status change for that issue
-3. Make your Pull Request
-4. Set `Reviewers` and `Assignees` to `Peter Schmalfeldt` ( or other project administrator )
-5. Choose an appropriate label from the `Labels`
+### Bug Fix
+
+> Each Bug Fix reported on GitHub should have its own `fix/*` branch.  The branch name should be formatted `fix/###-issue-name` where `###` is the GitHub Issue Number, and `issue-name` is a 1-3 word summary of the issue.
+
+1. Checkout latest `develop` branch
+2. Pull down the latest changes via `git pull`
+3. Create a new branch with the structure `fix/*`, e.g. `fix/123-broken-form`
+4. When you are ready to submit your code, submit a new Pull Request that merges your code into `develop`
+5. Tag your new Pull Request with `Ready for Code Review`
+
+### Feature Request
+
+> Each New Feature should reside in its own `feature/` branch. The branch name should be formatted `feature/###-feature-name` where `###` is the GitHub Issue Number, and `feature-name` is a 1-3 word summary of the feature.
+
+1. Checkout latest `develop` branch
+2. Pull down the latest changes via `git pull`
+3. Create a new branch with the structure `feature/*`, e.g. `feature/123-search-form`
+4. When you are ready to submit your code, submit a new Pull Request that merges your code into `develop`
+5. Tag your new Pull Request with `Ready for Code Review`
