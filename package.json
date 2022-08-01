@@ -1,7 +1,7 @@
 {
   "name": "explorer-exclude",
   "displayName": "Explorer Exclude",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
   "publisher": "PeterSchmalfeldt",

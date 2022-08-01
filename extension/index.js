@@ -20,7 +20,7 @@ function activate(context) {
 
   // Get Extension Version Info
   const currentVersion = context.globalState.get('explorer-exclude.version')
-  const packageVersion = vscode.extensions.getExtension('SFCCDevOps.explorer-exclude-vscode-extension').packageJSON.version
+  const packageVersion = vscode.extensions.getExtension('PeterSchmalfeldt.explorer-exclude').packageJSON.version
 
   // Check if there was a recent change to installed version
   if (currentVersion !== packageVersion) {

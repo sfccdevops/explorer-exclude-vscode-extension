@@ -3,13 +3,19 @@ Change Log
 
 > Here's our record of all notable changes made to to this project
 
+v1.3.1
+---
+
+* Fixed Naming Issue in PackageJSON
+
 v1.3.0
 ---
 
-* Added JSON Settings Linter Fix ( Thanks @MatthewTh0 )
-* Updated default null settings to `{}` vs `null` ( Thanks @Himadu2000 )
-* Add ability to not show picker and just directly exclude selected file ( Thanks @rw3iss )
+* Added system indicator to VS Code File Excludes that cannot be removed
+* Add the ability to not show picker and directly exclude selected file ( Thanks @rw3iss )
 * Updated Workspace Detection to handle a few more unique use cases
+* Updated default null settings to {} vs null ( Thanks @Himadu2000 )
+* Added JSON Settings Linter Fix ( Thanks @MatthewTh0 )
 
 v1.2.0
 ---
