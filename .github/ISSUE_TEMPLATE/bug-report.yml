@@ -19,6 +19,16 @@ body:
       required: true
   - type: textarea
     attributes:
+      label: Extension Output
+      description: Paste the `Explorer Exclude` Output Log to your ticket.
+      placeholder: |
+        1. Select `View` > `Output` from the Main Menu
+        2. Select `Explorer Exclude` from Output Select List
+        3. Copy all Output from log and paste in this text field
+    validations:
+      required: true
+  - type: textarea
+    attributes:
       label: Steps To Reproduce
       description: Steps to reproduce the behavior.
       placeholder: |

@@ -67,7 +67,7 @@ function activate(context) {
   })
 
   const remove = vscode.commands.registerCommand('explorer-exclude.remove', (uri) => {
-    util.logger(`REMOVE: ${uri}`, 'debug')
+    util.logger(`Remove: ${uri}`, 'debug')
     if (uri && uri.value) {
       const value = uri.value
       const key = value.substring(0, value.length - 2)

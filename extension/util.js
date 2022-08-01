@@ -24,15 +24,15 @@ const _await =
       function fulfilled(value) {
         try {
           step(generator.next(value))
-        } catch (e) {
-          reject(e)
+        } catch (err) {
+          reject(err)
         }
       }
       function rejected(value) {
         try {
           step(generator['throw'](value))
-        } catch (e) {
-          reject(e)
+        } catch (err) {
+          reject(err)
         }
       }
       function step(result) {
@@ -87,7 +87,7 @@ const getWorkspace = (context) => {
         root = vscode.workspace.getWorkspaceFolder(context)
         workspace = root && root.uri ? root.uri.fsPath : null
       } catch (err) {
-        logger(err, 'error')
+        logger(localize('debug.logger.error', 'getWorkspace:fetch', err.toString()), 'error')
       }
     }
   }
@@ -95,7 +95,7 @@ const getWorkspace = (context) => {
   // If we did not get Workspace, let the user know
   if (!workspace) {
     const message = localize('debug.logger.missingWorkspace')
-    logger(message, 'error')
+    logger(localize('debug.logger.error', 'getWorkspace', message), 'error')
     vscode.window.showErrorMessage(`${localize('extension.title')}: ${message}`)
   }
 
@@ -156,8 +156,9 @@ const parseFilePath = (_file, _root = '') => {
         base,
         dir,
       }
-    } catch (error) {
-      return Promise.reject(error)
+    } catch (err) {
+      logger(localize('debug.logger.error', 'parseFilePath', err.toString()), 'error')
+      return Promise.reject(err)
     }
   })
 }
@@ -202,9 +203,9 @@ const updateConfig = (excludes, callback, message) => {
             }
           })
       })
-  } catch (error) {
-    logger(error, 'error')
-    vscode.window.showErrorMessage(error.message || error)
+  } catch (err) {
+    logger(localize('debug.logger.error', 'updateConfig', err.toString()), 'error')
+    vscode.window.showErrorMessage(err.message || err)
   }
 }
 
@@ -284,7 +285,7 @@ function exclude(uri, callback) {
         _showPicker = true
       }
 
-      logger(`USING PICKER: ${_showPicker ? 'YES' : 'NO'}`, 'debug')
+      logger(`Using Picker: ${_showPicker ? 'YES' : 'NO'}`, 'debug')
 
       if (_showPicker) {
         Object.keys(_meta).forEach((key) => {
@@ -328,10 +329,10 @@ function exclude(uri, callback) {
       if (selections && selections.length > 0) {
         const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
 
-        logger('CURRENT EXCLUDES:', 'debug')
+        logger('Current Excludes:', 'debug')
         logger(excludes)
 
-        logger('ADDING EXCLUDE:', 'debug')
+        logger('Adding Exclude:', 'debug')
         logger(selections)
 
         try {
@@ -342,12 +343,14 @@ function exclude(uri, callback) {
               newExcludes[rule] = true
             })
           updateConfig(newExcludes, callback)
-        } catch (error) {
-          vscode.window.showErrorMessage(error.message || error)
+        } catch (err) {
+          logger(localize('debug.logger.error', 'exclude:update', err.toString()), 'error')
+          vscode.window.showErrorMessage(err.message || err)
         }
       }
-    } catch (error) {
-      vscode.window.showErrorMessage(error.message || error)
+    } catch (err) {
+      logger(localize('debug.logger.error', 'exclude', err.toString()), 'error')
+      vscode.window.showErrorMessage(err.message || err)
     }
   })
 }
@@ -485,8 +488,9 @@ function toggleAll(callback) {
             }
           })
       })
-  } catch (error) {
-    vscode.window.showErrorMessage(error.message || error)
+  } catch (err) {
+    logger(localize('debug.logger.error', 'toggleAll', err.toString()), 'error')
+    vscode.window.showErrorMessage(err.message || err)
   }
 }
 
@@ -504,7 +508,7 @@ function toggleExclude(key, callback) {
 
   // Invert Selection
   if (key && Object.prototype.hasOwnProperty.call(excludes, key)) {
-    logger(`TOGGLE: ${excludes[key] ? 'OFF' : 'ON'}`, 'debug')
+    logger(`Toggle: ${excludes[key] ? 'OFF' : 'ON'} | ${key}`, 'debug')
     excludes[key] = !excludes[key]
     updateConfig(excludes, callback)
   }
