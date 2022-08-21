@@ -75,6 +75,12 @@ const getWorkspace = (context) => {
           const relative = path.relative(wsFolder.uri.fsPath, vscode.window.activeTextEditor.document.uri.path)
           return relative && !relative.startsWith('..') && !path.isAbsolute(relative)
         })
+
+        // The file that is active does not belong to any of the workspace folders, so let's use the first workspace
+        if (!root) {
+          root = vscode.workspace.workspaceFolders[0]
+        }
+        
         workspace = root && root.uri ? root.uri.fsPath : null
       } else {
         // No file was open, so just grab the first available workspace
