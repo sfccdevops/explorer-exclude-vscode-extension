@@ -92,6 +92,12 @@
         }
       ]
     },
+    "viewsWelcome": [
+      {
+          "view": "explorerExclude.pane.items",
+          "contents": "%debug.logger.missingWorkspace%"
+      }
+    ],
     "commands": [
       {
         "command": "explorer-exclude.exclude",

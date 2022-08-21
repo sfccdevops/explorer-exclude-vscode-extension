@@ -92,13 +92,6 @@ const getWorkspace = (context) => {
     }
   }
 
-  // If we did not get Workspace, let the user know
-  if (!workspace) {
-    const message = localize('debug.logger.missingWorkspace')
-    logger(localize('debug.logger.error', 'getWorkspace', message), 'error')
-    vscode.window.showErrorMessage(`${localize('extension.title')}: ${message}`)
-  }
-
   // Debug Cartridge Path
   logger(localize('debug.logger.workspace', workspace))
 
