@@ -1,4 +1,5 @@
 {
+    "_language": "Korean",
     "command.openSettings.title": "확장 설정 업데이트",
     "config.properties.backup": "리소스 구성: 항상 마지막 줄이 비어 있도록 glob 패턴을 사용하여 파일을 구성합니다.",
     "config.properties.showPicker": "활성화된 경우 파일 패턴 선택기를 표시하거나 비활성화된 경우 정확히 일치를 제외합니다.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0}이 (가) 존재하지 않습니다.",
     "error.parseFilePath": "{0}을 (를) 사용할 수 없습니다.",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "숨겨진 항목에 추가 ...",
-    "package.pane": "숨겨진 항목",
-    "package.remove": "숨겨진 항목에서 제거",
-    "package.toggle": "공개 설정 / 해제",
     "package.disableAll": "모두 사용 안함",
     "package.enableAll": "모두 사용",
+    "package.exclude": "숨겨진 항목에 추가 ...",
+    "package.loading": "숨겨진 항목 로드 중...",
+    "package.pane": "숨겨진 항목",
+    "package.remove": "숨겨진 항목에서 제거",
     "package.reset": "숨겨진 항목 재설정",
+    "package.toggle": "공개 설정 / 해제",
     "picker.placeholder": "무엇을 숨기시겠습니까? 해당되는 모든 것들을 고르세요.",
+    "reset.prompt": "숨겨진 항목 재설정? 이 취소 할 수 없습니다.",
     "tooltip.hide": "{0} 숨기기",
-    "tooltip.show": "{0} 표시",
-    "reset.prompt": "숨겨진 항목 재설정? 이 취소 할 수 없습니다."
+    "tooltip.show": "{0} 표시"
 }

@@ -3,6 +3,13 @@ Change Log
 
 > Here's our record of all notable changes made to to this project
 
+v1.3.2
+---
+
+* Add additional fallback for Workspace Detection ( Thanks @bjrmatos )
+* Move Missing Workspace Message to Panel rather than show alert ( Thanks @colas31 )
+* Revert Glob Pattern Change that used OS Path Separator
+
 v1.3.1
 ---
 

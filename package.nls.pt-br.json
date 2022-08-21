@@ -1,4 +1,5 @@
 {
+    "_language": "Portuguese",
     "command.openSettings.title": "Atualizar configurações de extensão",
     "config.properties.backup": "Configuração de recursos: configure arquivos usando padrões glob para ter sempre uma última linha vazia.",
     "config.properties.showPicker": "Mostrar seletor de padrão de arquivo quando ativado ou Excluir correspondência exata quando desativado.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} não existe",
     "error.parseFilePath": "{0} não está disponível",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Adicionar aos itens ocultos ...",
-    "package.pane": "Itens ocultos",
-    "package.remove": "Remover de itens ocultos",
-    "package.toggle": "Alternar visibilidade",
     "package.disableAll": "Desativar tudo",
     "package.enableAll": "Habilitar todos",
+    "package.exclude": "Adicionar aos itens ocultos ...",
+    "package.loading": "Carregando itens ocultos...",
+    "package.pane": "Itens ocultos",
+    "package.remove": "Remover de itens ocultos",
     "package.reset": "Redefinir itens ocultos",
+    "package.toggle": "Alternar visibilidade",
     "picker.placeholder": "O que você gostaria de esconder? Selecione tudo que se aplica.",
+    "reset.prompt": "Redefinir itens ocultos? Isto não pode ser desfeito.",
     "tooltip.hide": "Esconder {0}",
-    "tooltip.show": "Mostrar {0}",
-    "reset.prompt": "Redefinir itens ocultos? Isto não pode ser desfeito."
+    "tooltip.show": "Mostrar {0}"
 }

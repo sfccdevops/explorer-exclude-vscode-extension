@@ -1,4 +1,5 @@
 {
+    "_language": "English",
     "command.openSettings.title": "Update Extension Settings",
     "config.properties.backup": "Resource configuration: Configure files using glob patterns to have an empty last line always.",
     "config.properties.showPicker": "Show File Pattern Picker when Enabled or Exclude Exact Match when disabled.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} does not exist",
     "error.parseFilePath": "{0} is not available",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Add to Hidden Items ...",
-    "package.pane": "Hidden Items",
-    "package.remove": "Remove from Hidden Items",
-    "package.toggle": "Toggle Visibility",
     "package.disableAll": "Disable All",
     "package.enableAll": "Enable All",
+    "package.exclude": "Add to Hidden Items ...",
+    "package.loading": "Loading Hidden Items ...",
+    "package.pane": "Hidden Items",
+    "package.remove": "Remove from Hidden Items",
     "package.reset": "Reset Hidden Items",
+    "package.toggle": "Toggle Visibility",
     "picker.placeholder": "What would you like to hide? Select all that apply.",
+    "reset.prompt": "Reset Hidden Items? This cannot be undone.",
     "tooltip.hide": "Hide {0}",
-    "tooltip.show": "Show {0}",
-    "reset.prompt": "Reset Hidden Items? This cannot be undone."
+    "tooltip.show": "Show {0}"
 }

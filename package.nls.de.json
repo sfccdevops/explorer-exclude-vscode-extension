@@ -1,4 +1,5 @@
 {
+    "_language": "German",
     "command.openSettings.title": "Erweiterungseinstellungen aktualisieren",
     "config.properties.backup": "Ressourcenkonfiguration: Konfigurieren Sie Dateien mit Glob-Mustern so, dass sie immer eine leere letzte Zeile haben.",
     "config.properties.showPicker": "Dateimusterauswahl anzeigen, wenn aktiviert, oder Exakte Übereinstimmung ausschließen, wenn deaktiviert.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} existiert nicht",
     "error.parseFilePath": "{0} ist nicht verfügbar",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Zu ausgeblendeten Objekten hinzufügen ...",
-    "package.pane": "Versteckte Gegenstände",
-    "package.remove": "Aus ausgeblendeten Objekten entfernen",
-    "package.toggle": "Sichtbarkeit umschalten",
     "package.disableAll": "Alle deaktivieren",
     "package.enableAll": "Alles aktivieren",
+    "package.exclude": "Zu ausgeblendeten Objekten hinzufügen ...",
+    "package.loading": "Versteckte Elemente werden geladen ...",
+    "package.pane": "Versteckte Gegenstände",
+    "package.remove": "Aus ausgeblendeten Objekten entfernen",
     "package.reset": "Versteckte Objekte zurücksetzen",
+    "package.toggle": "Sichtbarkeit umschalten",
     "picker.placeholder": "Was möchtest du verstecken? Wählen Sie alle zutreffenden.",
+    "reset.prompt": "Versteckte Objekte zurücksetzen? Das kann nicht rückgängig gemacht werden.",
     "tooltip.hide": "{0} ausblenden",
-    "tooltip.show": "{0} anzeigen",
-    "reset.prompt": "Versteckte Objekte zurücksetzen? Das kann nicht rückgängig gemacht werden."
+    "tooltip.show": "{0} anzeigen"
 }

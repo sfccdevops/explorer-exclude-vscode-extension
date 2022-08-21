@@ -1,4 +1,5 @@
 {
+    "_language": "French",
     "command.openSettings.title": "Mettre à jour les paramètres d'extension",
     "config.properties.backup": "Configuration des ressources : configurez les fichiers à l'aide de modèles glob pour qu'ils aient toujours une dernière ligne vide.",
     "config.properties.showPicker": "Afficher le sélecteur de modèle de fichier lorsqu'il est activé ou exclure la correspondance exacte lorsqu'il est désactivé.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} n'existe pas",
     "error.parseFilePath": "{0} n'est pas disponible",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Ajouter aux éléments cachés ...",
-    "package.pane": "Objets Cachés",
-    "package.remove": "Supprimer des éléments cachés",
-    "package.toggle": "Basculer la visibilité",
     "package.disableAll": "Désactiver tous les",
     "package.enableAll": "Activer tout",
+    "package.exclude": "Ajouter aux éléments cachés ...",
+    "package.loading": "Chargement des éléments masqués...",
+    "package.pane": "Objets Cachés",
+    "package.remove": "Supprimer des éléments cachés",
     "package.reset": "Réinitialiser les éléments cachés",
+    "package.toggle": "Basculer la visibilité",
     "picker.placeholder": "Que voudriez-vous cacher? Sélectionnez tout ce qui s'y rapporte.",
+    "reset.prompt": "Réinitialiser les éléments cachés? Ça ne peut pas être annulé.",
     "tooltip.hide": "Masquer {0}",
-    "tooltip.show": "Montrer {0}",
-    "reset.prompt": "Réinitialiser les éléments cachés? Ça ne peut pas être annulé."
+    "tooltip.show": "Montrer {0}"
 }

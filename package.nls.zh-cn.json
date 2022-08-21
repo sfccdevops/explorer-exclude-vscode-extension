@@ -1,4 +1,5 @@
 {
+    "_language": "Chinese (Simplified)",
     "command.openSettings.title": "更新扩展设置",
     "config.properties.backup": "资源配置：使用模式配置文件以始终有一个空的最后一行。",
     "config.properties.showPicker": "启用时显示文件模式选择器或禁用时排除完全匹配。",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0}不存在",
     "error.parseFilePath": "{0}不可用",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "添加到隐藏物品...",
-    "package.pane": "隐藏物品",
-    "package.remove": "从隐藏物品中删除",
-    "package.toggle": "切换可见性",
     "package.disableAll": "禁用所有",
     "package.enableAll": "全部启用",
+    "package.exclude": "添加到隐藏物品...",
+    "package.loading": "加载隐藏物品...",
+    "package.pane": "隐藏物品",
+    "package.remove": "从隐藏物品中删除",
     "package.reset": "重置隐藏的项目",
+    "package.toggle": "切换可见性",
     "picker.placeholder": "你想隐藏什么？选择所有符合条件的。",
+    "reset.prompt": "重置隐藏物品？这不能被撤消。",
     "tooltip.hide": "隐藏{0}",
-    "tooltip.show": "显示{0}",
-    "reset.prompt": "重置隐藏物品？这不能被撤消。"
+    "tooltip.show": "显示{0}"
 }

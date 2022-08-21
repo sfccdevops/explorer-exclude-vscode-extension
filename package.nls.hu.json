@@ -1,4 +1,5 @@
 {
+    "_language": "Hungarian",
     "command.openSettings.title": "Frissítse a bővítmény beállításait",
     "config.properties.backup": "Erőforrás-konfiguráció: Állítsa be a fájlokat glob-mintákkal úgy, hogy az utolsó sor mindig üres legyen.",
     "config.properties.showPicker": "Fájlmintaválasztó megjelenítése, ha engedélyezve van, vagy Pontos egyezés kizárása, ha le van tiltva.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} nem létezik",
     "error.parseFilePath": "{0} nem érhető el",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Hozzáadás a rejtett elemekhez ...",
-    "package.pane": "Rejtett elemek",
-    "package.remove": "Eltávolítás a rejtett elemekből",
-    "package.toggle": "A láthatóság váltása",
     "package.disableAll": "Összes letiltása",
     "package.enableAll": "Az összes engedélyezése",
+    "package.exclude": "Hozzáadás a rejtett elemekhez ...",
+    "package.loading": "Rejtett elemek betöltése...",
+    "package.pane": "Rejtett elemek",
+    "package.remove": "Eltávolítás a rejtett elemekből",
     "package.reset": "A rejtett elemek visszaállítása",
+    "package.toggle": "A láthatóság váltása",
     "picker.placeholder": "Mit szeretne elrejteni? Válassza ki az összes alkalmazást.",
+    "reset.prompt": "A rejtett elemek visszaállítása? Ezt nem lehet visszacsinálni.",
     "tooltip.hide": "{0} elrejtése",
-    "tooltip.show": "{0} megjelenítése",
-    "reset.prompt": "A rejtett elemek visszaállítása? Ezt nem lehet visszacsinálni."
+    "tooltip.show": "{0} megjelenítése"
 }
