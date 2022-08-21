@@ -80,7 +80,7 @@ const getWorkspace = (context) => {
         if (!root) {
           root = vscode.workspace.workspaceFolders[0]
         }
-        
+
         workspace = root && root.uri ? root.uri.fsPath : null
       } else {
         // No file was open, so just grab the first available workspace
@@ -96,6 +96,15 @@ const getWorkspace = (context) => {
         logger(localize('debug.logger.error', 'getWorkspace:fetch', err.toString()), 'error')
       }
     }
+  }
+
+  // If we did not get Workspace, let the user know
+  if (!workspace) {
+    const message = localize('debug.logger.missingWorkspace')
+    logger(localize('debug.logger.error', 'getWorkspace', message), 'error')
+
+    vscode.commands.executeCommand('setContext', 'explorer-exclude.missingWorkspace', true)
+    vscode.commands.executeCommand('setContext', 'explorer-exclude.hasLoaded', true)
   }
 
   // Debug Cartridge Path
@@ -293,13 +302,13 @@ function exclude(uri, callback) {
             case 'path':
               break
             case 'ext':
-              regex = _meta[key] ? `**${path.sep}*${_meta[key]}` : undefined
+              regex = _meta[key] ? `**/*${_meta[key]}` : undefined
               break
             case 'base':
               regex = _meta[key]
               break
             case 'dir':
-              if (_showPicker) regex = _meta[key] ? `${_meta[key] + path.sep}*.*` : undefined
+              if (_showPicker) regex = _meta[key] ? `${_meta[key]}/*.*` : undefined
               break
           }
           if (regex) {
@@ -308,15 +317,15 @@ function exclude(uri, callback) {
         })
 
         if (_meta['dir'] && _meta['ext']) {
-          options.push(`${_meta['dir']}${path.sep}*${_meta['ext']}`)
+          options.push(`${_meta['dir']}/*${_meta['ext']}`)
         } else if (_meta['ext']) {
           options.push(`*${_meta['ext']}`)
         }
 
         if (_meta['base']) {
-          options.push(`**${path.sep}${_meta['base']}`)
+          options.push(`**/${_meta['base']}`)
           if (_meta['dir']) {
-            options.push(`${_meta['dir']}${path.sep}${_meta['base']}`)
+            options.push(`${_meta['dir']}/${_meta['base']}`)
           }
         }
 

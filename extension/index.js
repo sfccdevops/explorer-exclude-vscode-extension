@@ -67,10 +67,11 @@ function activate(context) {
   })
 
   const remove = vscode.commands.registerCommand('explorer-exclude.remove', (uri) => {
-    util.logger(`Remove: ${uri}`, 'debug')
     if (uri && uri.value) {
       const value = uri.value
       const key = value.substring(0, value.length - 2)
+
+      util.logger(`Remove: ${key}`, 'debug')
 
       util.deleteExclude(key, function () {
         setTimeout(function () {
@@ -124,6 +125,7 @@ function activate(context) {
 
   // Set Initial State of Extension
   vscode.commands.executeCommand('setContext', 'explorer-exclude.enabled', true)
+  vscode.commands.executeCommand('setContext', 'explorer-exclude.hasLoaded', true)
 
   // Save Extension Context for later use
   util.saveContext(context)
@@ -146,7 +148,9 @@ function activate(context) {
 /**
  * Handle Deactivating Extension
  */
-function deactivate() {}
+function deactivate() {
+  vscode.commands.executeCommand('setContext', 'explorer-exclude.enabled', false)
+}
 
 module.exports = {
   activate,

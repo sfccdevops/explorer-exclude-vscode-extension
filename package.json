@@ -1,7 +1,7 @@
 {
   "name": "explorer-exclude",
   "displayName": "Explorer Exclude",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
   "license": "MIT",
   "publisher": "PeterSchmalfeldt",
@@ -47,17 +47,19 @@
     }
   ],
   "activationEvents": [
-    "onStartupFinished",
-    "onView:extension",
-    "onCommand:explorer-exclude.enabled",
-    "onCommand:explorer-exclude.exclude",
-    "onCommand:explorer-exclude.remove",
-    "onCommand:explorer-exclude.toggle",
-    "onCommand:explorer-exclude.toggleAllOn",
-    "onCommand:explorer-exclude.toggleAllOff",
     "onCommand:explorer-exclude.disableAll",
     "onCommand:explorer-exclude.enableAll",
-    "onCommand:explorer-exclude.reset"
+    "onCommand:explorer-exclude.enabled",
+    "onCommand:explorer-exclude.exclude",
+    "onCommand:explorer-exclude.hasLoaded",
+    "onCommand:explorer-exclude.missingWorkspace",
+    "onCommand:explorer-exclude.remove",
+    "onCommand:explorer-exclude.reset",
+    "onCommand:explorer-exclude.toggle",
+    "onCommand:explorer-exclude.toggleAllOff",
+    "onCommand:explorer-exclude.toggleAllOn",
+    "onStartupFinished",
+    "onView:extension"
   ],
   "contributes": {
     "configuration": [
@@ -94,8 +96,14 @@
     },
     "viewsWelcome": [
       {
-          "view": "explorerExclude.pane.items",
-          "contents": "%debug.logger.missingWorkspace%"
+        "view": "explorerExclude.pane.items",
+        "contents": "%package.loading%",
+        "when": "!explorer-exclude.missingWorkspace && !explorer-exclude.hasLoaded"
+      },
+      {
+        "view": "explorerExclude.pane.items",
+        "contents": "%debug.logger.missingWorkspace%",
+        "when": "explorer-exclude.missingWorkspace"
       }
     ],
     "commands": [
@@ -171,46 +179,46 @@
         {
           "command": "explorer-exclude.exclude",
           "group": "explorer-exclude@1",
-          "when": "activeViewlet == 'workbench.view.explorer'"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && activeViewlet == 'workbench.view.explorer'"
         }
       ],
       "view/item/context": [
         {
           "command": "explorer-exclude.remove",
           "group": "explorer-exclude@1",
-          "when": "view == explorerExclude.pane.items && viewItem && viewItem != '**/.git' && viewItem != '**/.svn'&& viewItem != '**/.hg'&& viewItem != '**/CVS'&& viewItem != '**/.DS_Store' && viewItem != '**/Thumbs.db' && viewItem != '**/*.git'"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem && viewItem != '**/.git' && viewItem != '**/.svn'&& viewItem != '**/.hg'&& viewItem != '**/CVS'&& viewItem != '**/.DS_Store' && viewItem != '**/Thumbs.db' && viewItem != '**/*.git'"
         }
       ],
       "view/title": [
         {
           "command": "explorer-exclude.disableAll",
           "group": "navigation@10",
-          "when": "view == explorerExclude.pane.items"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
         },
         {
           "command": "explorer-exclude.enableAll",
           "group": "navigation@11",
-          "when": "view == explorerExclude.pane.items"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
         },
         {
           "command": "explorer-exclude.toggleAllOn",
           "group": "navigation@12",
-          "when": "view == explorerExclude.pane.items && !explorer-exclude.enabled"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && !explorer-exclude.enabled"
         },
         {
           "command": "explorer-exclude.toggleAllOff",
           "group": "navigation@12",
-          "when": "view == explorerExclude.pane.items && explorer-exclude.enabled"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && explorer-exclude.enabled"
         },
         {
           "command": "explorer-exclude.reset",
           "group": "navigation@13",
-          "when": "view == explorerExclude.pane.items"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
         },
         {
           "command": "explorer-exclude.openSettings",
           "group": "navigation@14",
-          "when": "view == explorerExclude.pane.items"
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
         }
       ]
     }

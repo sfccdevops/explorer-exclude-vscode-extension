@@ -1,4 +1,5 @@
 {
+    "_language": "Japanese",
     "command.openSettings.title": "拡張設定の更新",
     "config.properties.backup": "リソース構成：globパターンを使用してファイルを構成し、常に最後の行が空になるようにします。",
     "config.properties.showPicker": "有効な場合はファイルパターンピッカーを表示し、無効な場合は完全一致を除外します。",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0}は存在しません",
     "error.parseFilePath": "{0}は利用できません",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "隠しアイテムに追加...",
-    "package.pane": "隠しアイテム",
-    "package.remove": "隠しアイテムから削除",
-    "package.toggle": "可視性を切り替える",
     "package.disableAll": "すべて無効にします",
     "package.enableAll": "全て可能にする",
+    "package.exclude": "隠しアイテムに追加...",
+    "package.loading": "非表示のアイテムを読み込んでいます...",
+    "package.pane": "隠しアイテム",
+    "package.remove": "隠しアイテムから削除",
     "package.reset": "隠しアイテムをリセット",
+    "package.toggle": "可視性を切り替える",
     "picker.placeholder": "何を隠したいですか？該当するものをすべて選択。",
+    "reset.prompt": "隠しアイテムをリセットしますか？これは、元に戻すことはできません。",
     "tooltip.hide": "{0}を非表示",
-    "tooltip.show": "{0}を表示",
-    "reset.prompt": "隠しアイテムをリセットしますか？これは、元に戻すことはできません。"
+    "tooltip.show": "{0}を表示"
 }

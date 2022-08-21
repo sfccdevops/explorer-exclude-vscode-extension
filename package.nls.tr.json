@@ -1,4 +1,5 @@
 {
+    "_language": "Turkish",
     "command.openSettings.title": "Uzantı Ayarlarını Güncelle",
     "config.properties.backup": "Kaynak yapılandırması: Her zaman boş bir son satıra sahip olmak için glob kalıplarını kullanarak dosyaları yapılandırın.",
     "config.properties.showPicker": "Etkinleştirildiğinde Dosya Desen Seçici'yi göster veya devre dışı bırakıldığında Tam Eşleşmeyi Hariç Tut.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} mevcut değil",
     "error.parseFilePath": "{0} mevcut değil",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Gizli Öğelere Ekle ...",
-    "package.pane": "Gizli Öğeler",
-    "package.remove": "Gizli Öğelerden Kaldır",
-    "package.toggle": "Görünürlüğü Değiştir",
     "package.disableAll": "Hepsini etkisiz hale getir",
     "package.enableAll": "Hepsini etkinleştir",
+    "package.exclude": "Gizli Öğelere Ekle ...",
+    "package.loading": "Gizli Öğeler Yükleniyor...",
+    "package.pane": "Gizli Öğeler",
+    "package.remove": "Gizli Öğelerden Kaldır",
     "package.reset": "Gizli Öğeleri Sıfırla",
+    "package.toggle": "Görünürlüğü Değiştir",
     "picker.placeholder": "Ne saklamak istersiniz? Uygun olanları seçin.",
+    "reset.prompt": "Gizli Öğeleri Sıfırla? Bu geri alınamaz.",
     "tooltip.hide": "{0} sakla",
-    "tooltip.show": "{0} göster",
-    "reset.prompt": "Gizli Öğeleri Sıfırla? Bu geri alınamaz."
+    "tooltip.show": "{0} göster"
 }

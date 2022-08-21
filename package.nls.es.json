@@ -1,4 +1,5 @@
 {
+    "_language": "Spanish",
     "command.openSettings.title": "Actualizar la configuración de la extensión",
     "config.properties.backup": "Configuración de recursos: configure archivos usando patrones globales para tener siempre una última línea vacía.",
     "config.properties.showPicker": "Mostrar selector de patrón de archivo cuando está habilitado o excluir coincidencia exacta cuando está deshabilitado.",
@@ -9,15 +10,16 @@
     "error.ifExists": "{0} no existe",
     "error.parseFilePath": "{0} no está disponible",
     "extension.title": "Explorer Exclude",
-    "package.exclude": "Añadir a objetos ocultos ...",
-    "package.pane": "Objetos ocultos",
-    "package.remove": "Eliminar de los elementos ocultos",
-    "package.toggle": "Alternar la visibilidad",
     "package.disableAll": "Desactivar todo",
     "package.enableAll": "Activar todo",
+    "package.exclude": "Añadir a objetos ocultos ...",
+    "package.loading": "Cargando elementos ocultos...",
+    "package.pane": "Objetos ocultos",
+    "package.remove": "Eliminar de los elementos ocultos",
     "package.reset": "Restablecer elementos ocultos",
+    "package.toggle": "Alternar la visibilidad",
     "picker.placeholder": "¿Qué te gustaría esconder? Seleccione todas las que correspondan.",
+    "reset.prompt": "¿Desea restablecer los elementos ocultos? Esto no se puede deshacer.",
     "tooltip.hide": "Ocultar {0}",
-    "tooltip.show": "Show {0}",
-    "reset.prompt": "¿Desea restablecer los elementos ocultos? Esto no se puede deshacer."
+    "tooltip.show": "Show {0}"
 }
