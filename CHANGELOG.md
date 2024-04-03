@@ -3,6 +3,11 @@ Change Log
 
 > Here's our record of all notable changes made to to this project
 
+V1.3.3
+---
+
+* Add explorer-exclude.showSelected command that opens up a QuickPick window with all the excluded items and allows you to quickly filter and select which item you want to be visible in the explorer.
+
 v1.3.2
 ---
 

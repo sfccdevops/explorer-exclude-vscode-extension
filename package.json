@@ -1,244 +1,252 @@
 {
-  "name": "explorer-exclude",
-  "displayName": "Explorer Exclude",
-  "version": "1.3.2",
-  "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
-  "license": "MIT",
-  "publisher": "PeterSchmalfeldt",
-  "categories": [
-    "Other"
-  ],
-  "main": "extension/index.js",
-  "icon": "extension/resources/icon.png",
-  "galleryBanner": {
-    "color": "#1c1c1c",
-    "theme": "dark"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension"
-  },
-  "bugs": {
-    "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues"
-  },
-  "engines": {
-    "vscode": "^1.60.0",
-    "node": "^14.19.0"
-  },
-  "keywords": [
-    "context-menu",
-    "exclude",
-    "explorer",
-    "files",
-    "folders",
-    "hidden",
-    "hide",
-    "ignore",
-    "pane",
-    "show",
-    "toggle",
-    "workspace"
-  ],
-  "contributors": [
-    {
-      "name": "Peter Schmalfeldt",
-      "email": "me@peterschmalfeldt.com",
-      "url": "https://peterschmalfeldt.com"
-    }
-  ],
-  "activationEvents": [
-    "onCommand:explorer-exclude.disableAll",
-    "onCommand:explorer-exclude.enableAll",
-    "onCommand:explorer-exclude.enabled",
-    "onCommand:explorer-exclude.exclude",
-    "onCommand:explorer-exclude.hasLoaded",
-    "onCommand:explorer-exclude.missingWorkspace",
-    "onCommand:explorer-exclude.remove",
-    "onCommand:explorer-exclude.reset",
-    "onCommand:explorer-exclude.toggle",
-    "onCommand:explorer-exclude.toggleAllOff",
-    "onCommand:explorer-exclude.toggleAllOn",
-    "onStartupFinished",
-    "onView:extension"
-  ],
-  "contributes": {
-    "configuration": [
-      {
-        "title": "%extension.title%",
-        "properties": {
-          "explorerExclude.backup": {
-            "order": 1,
-            "type": [
-              "object",
-              "null"
-            ],
-            "default": {},
-            "description": "%config.properties.backup%",
-            "scope": "window"
-          },
-          "explorerExclude.showPicker": {
-            "order": 2,
-            "type": "boolean",
-            "default": true,
-            "description": "%config.properties.showPicker%",
-            "scope": "window"
-          }
-        }
-      }
+    "name": "explorer-exclude",
+    "displayName": "Explorer Exclude",
+    "version": "1.3.3",
+    "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
+    "license": "MIT",
+    "publisher": "PeterSchmalfeldt",
+    "categories": [
+        "Other"
     ],
-    "views": {
-      "explorer": [
-        {
-          "id": "explorerExclude.pane.items",
-          "name": "%package.pane%"
-        }
-      ]
+    "main": "extension/index.js",
+    "icon": "extension/resources/icon.png",
+    "galleryBanner": {
+        "color": "#1c1c1c",
+        "theme": "dark"
     },
-    "viewsWelcome": [
-      {
-        "view": "explorerExclude.pane.items",
-        "contents": "%package.loading%",
-        "when": "!explorer-exclude.missingWorkspace && !explorer-exclude.hasLoaded"
-      },
-      {
-        "view": "explorerExclude.pane.items",
-        "contents": "%debug.logger.missingWorkspace%",
-        "when": "explorer-exclude.missingWorkspace"
-      }
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension"
+    },
+    "bugs": {
+        "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues"
+    },
+    "engines": {
+        "vscode": "^1.60.0",
+        "node": "^14.19.0"
+    },
+    "keywords": [
+        "context-menu",
+        "exclude",
+        "explorer",
+        "files",
+        "folders",
+        "hidden",
+        "hide",
+        "ignore",
+        "pane",
+        "show",
+        "toggle",
+        "workspace"
     ],
-    "commands": [
-      {
-        "command": "explorer-exclude.exclude",
-        "title": "%package.exclude%"
-      },
-      {
-        "command": "explorer-exclude.remove",
-        "title": "%package.remove%"
-      },
-      {
-        "command": "explorer-exclude.toggle",
-        "title": "%package.toggle%"
-      },
-      {
-        "command": "explorer-exclude.toggleAllOn",
-        "title": "%package.toggle%",
-        "category": "ExplorerExclude",
-        "icon": {
-          "dark": "extension/resources/dark/toggle-on.svg",
-          "light": "extension/resources/light/toggle-on.svg"
+    "contributors": [
+        {
+            "name": "Peter Schmalfeldt",
+            "email": "me@peterschmalfeldt.com",
+            "url": "https://peterschmalfeldt.com"
+        },
+        {
+            "name": "Asaf Mazuz",
+            "url": "https://github.com/AsafMazuz1"
         }
-      },
-      {
-        "command": "explorer-exclude.toggleAllOff",
-        "title": "%package.toggle%",
-        "category": "ExplorerExclude",
-        "icon": {
-          "dark": "extension/resources/dark/toggle-off.svg",
-          "light": "extension/resources/light/toggle-off.svg"
-        }
-      },
-      {
-        "command": "explorer-exclude.disableAll",
-        "title": "%package.disableAll%",
-        "category": "ExplorerExclude",
-        "icon": {
-          "dark": "extension/resources/dark/unchecked.svg",
-          "light": "extension/resources/light/unchecked.svg"
-        }
-      },
-      {
-        "command": "explorer-exclude.enableAll",
-        "title": "%package.enableAll%",
-        "category": "ExplorerExclude",
-        "icon": {
-          "dark": "extension/resources/dark/checked.svg",
-          "light": "extension/resources/light/checked.svg"
-        }
-      },
-      {
-        "command": "explorer-exclude.reset",
-        "title": "%package.reset%",
-        "category": "ExplorerExclude",
-        "icon": {
-          "dark": "extension/resources/dark/reset.svg",
-          "light": "extension/resources/light/reset.svg"
-        }
-      },
-      {
-        "command": "explorer-exclude.openSettings",
-        "title": "%command.openSettings.title%",
-        "category": "ExplorerExclude",
-        "icon": {
-          "dark": "extension/resources/dark/settings.svg",
-          "light": "extension/resources/light/settings.svg"
-        }
-      }
     ],
-    "menus": {
-      "explorer/context": [
-        {
-          "command": "explorer-exclude.exclude",
-          "group": "explorer-exclude@1",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && activeViewlet == 'workbench.view.explorer'"
+    "activationEvents": [
+        "onCommand:explorer-exclude.disableAll",
+        "onCommand:explorer-exclude.enableAll",
+        "onCommand:explorer-exclude.enabled",
+        "onCommand:explorer-exclude.exclude",
+        "onCommand:explorer-exclude.hasLoaded",
+        "onCommand:explorer-exclude.missingWorkspace",
+        "onCommand:explorer-exclude.remove",
+        "onCommand:explorer-exclude.reset",
+        "onCommand:explorer-exclude.toggle",
+        "onCommand:explorer-exclude.toggleAllOff",
+        "onCommand:explorer-exclude.toggleAllOn",
+        "onStartupFinished",
+        "onView:extension"
+    ],
+    "contributes": {
+        "configuration": [
+            {
+                "title": "%extension.title%",
+                "properties": {
+                    "explorerExclude.backup": {
+                        "order": 1,
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "default": {},
+                        "description": "%config.properties.backup%",
+                        "scope": "window"
+                    },
+                    "explorerExclude.showPicker": {
+                        "order": 2,
+                        "type": "boolean",
+                        "default": true,
+                        "description": "%config.properties.showPicker%",
+                        "scope": "window"
+                    }
+                }
+            }
+        ],
+        "views": {
+            "explorer": [
+                {
+                    "id": "explorerExclude.pane.items",
+                    "name": "%package.pane%"
+                }
+            ]
+        },
+        "viewsWelcome": [
+            {
+                "view": "explorerExclude.pane.items",
+                "contents": "%package.loading%",
+                "when": "!explorer-exclude.missingWorkspace && !explorer-exclude.hasLoaded"
+            },
+            {
+                "view": "explorerExclude.pane.items",
+                "contents": "%debug.logger.missingWorkspace%",
+                "when": "explorer-exclude.missingWorkspace"
+            }
+        ],
+        "commands": [
+            {
+                "command": "explorer-exclude.showSelected",
+                "title": "%package.select%"
+            },
+            {
+                "command": "explorer-exclude.exclude",
+                "title": "%package.exclude%"
+            },
+            {
+                "command": "explorer-exclude.remove",
+                "title": "%package.remove%"
+            },
+            {
+                "command": "explorer-exclude.toggle",
+                "title": "%package.toggle%"
+            },
+            {
+                "command": "explorer-exclude.toggleAllOn",
+                "title": "%package.toggle%",
+                "category": "ExplorerExclude",
+                "icon": {
+                    "dark": "extension/resources/dark/toggle-on.svg",
+                    "light": "extension/resources/light/toggle-on.svg"
+                }
+            },
+            {
+                "command": "explorer-exclude.toggleAllOff",
+                "title": "%package.toggle%",
+                "category": "ExplorerExclude",
+                "icon": {
+                    "dark": "extension/resources/dark/toggle-off.svg",
+                    "light": "extension/resources/light/toggle-off.svg"
+                }
+            },
+            {
+                "command": "explorer-exclude.disableAll",
+                "title": "%package.disableAll%",
+                "category": "ExplorerExclude",
+                "icon": {
+                    "dark": "extension/resources/dark/unchecked.svg",
+                    "light": "extension/resources/light/unchecked.svg"
+                }
+            },
+            {
+                "command": "explorer-exclude.enableAll",
+                "title": "%package.enableAll%",
+                "category": "ExplorerExclude",
+                "icon": {
+                    "dark": "extension/resources/dark/checked.svg",
+                    "light": "extension/resources/light/checked.svg"
+                }
+            },
+            {
+                "command": "explorer-exclude.reset",
+                "title": "%package.reset%",
+                "category": "ExplorerExclude",
+                "icon": {
+                    "dark": "extension/resources/dark/reset.svg",
+                    "light": "extension/resources/light/reset.svg"
+                }
+            },
+            {
+                "command": "explorer-exclude.openSettings",
+                "title": "%command.openSettings.title%",
+                "category": "ExplorerExclude",
+                "icon": {
+                    "dark": "extension/resources/dark/settings.svg",
+                    "light": "extension/resources/light/settings.svg"
+                }
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "explorer-exclude.exclude",
+                    "group": "explorer-exclude@1",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && activeViewlet == 'workbench.view.explorer'"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "explorer-exclude.remove",
+                    "group": "explorer-exclude@1",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem && viewItem != '**/.git' && viewItem != '**/.svn'&& viewItem != '**/.hg'&& viewItem != '**/CVS'&& viewItem != '**/.DS_Store' && viewItem != '**/Thumbs.db' && viewItem != '**/*.git'"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "explorer-exclude.disableAll",
+                    "group": "navigation@10",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+                },
+                {
+                    "command": "explorer-exclude.enableAll",
+                    "group": "navigation@11",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+                },
+                {
+                    "command": "explorer-exclude.toggleAllOn",
+                    "group": "navigation@12",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && !explorer-exclude.enabled"
+                },
+                {
+                    "command": "explorer-exclude.toggleAllOff",
+                    "group": "navigation@12",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && explorer-exclude.enabled"
+                },
+                {
+                    "command": "explorer-exclude.reset",
+                    "group": "navigation@13",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+                },
+                {
+                    "command": "explorer-exclude.openSettings",
+                    "group": "navigation@14",
+                    "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+                }
+            ]
         }
-      ],
-      "view/item/context": [
-        {
-          "command": "explorer-exclude.remove",
-          "group": "explorer-exclude@1",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem && viewItem != '**/.git' && viewItem != '**/.svn'&& viewItem != '**/.hg'&& viewItem != '**/CVS'&& viewItem != '**/.DS_Store' && viewItem != '**/Thumbs.db' && viewItem != '**/*.git'"
-        }
-      ],
-      "view/title": [
-        {
-          "command": "explorer-exclude.disableAll",
-          "group": "navigation@10",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
-        },
-        {
-          "command": "explorer-exclude.enableAll",
-          "group": "navigation@11",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
-        },
-        {
-          "command": "explorer-exclude.toggleAllOn",
-          "group": "navigation@12",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && !explorer-exclude.enabled"
-        },
-        {
-          "command": "explorer-exclude.toggleAllOff",
-          "group": "navigation@12",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && explorer-exclude.enabled"
-        },
-        {
-          "command": "explorer-exclude.reset",
-          "group": "navigation@13",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
-        },
-        {
-          "command": "explorer-exclude.openSettings",
-          "group": "navigation@14",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
-        }
-      ]
+    },
+    "scripts": {
+        "test": "npm run -s test:lint && npm run -s test:unit",
+        "test:unit": "echo 'No Unit Tests'",
+        "test:lint": "eslint --ext .js ./extension --fix && echo '\n【ツ】CODE PERFECTION !!!\n'"
+    },
+    "dependencies": {
+        "jsonc-parser": "^3.1.0",
+        "marked": "^4.0.18",
+        "vscode-nls-i18n": "^0.2.4"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint": "^8.20.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "lint-staged": "^13.0.3",
+        "prettier": "^2.7.1"
     }
-  },
-  "scripts": {
-    "test": "npm run -s test:lint && npm run -s test:unit",
-    "test:unit": "echo 'No Unit Tests'",
-    "test:lint": "eslint --ext .js ./extension --fix && echo '\n【ツ】CODE PERFECTION !!!\n'"
-  },
-  "dependencies": {
-    "jsonc-parser": "^3.1.0",
-    "marked": "^4.0.18",
-    "vscode-nls-i18n": "^0.2.4"
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^8.20.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1"
-  }
 }

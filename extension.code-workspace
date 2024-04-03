@@ -11,6 +11,7 @@
 			"srggrs",
 			"viewpane",
 			"vsix"
-		]
+        ],
+        "nuxt.isNuxtApp": false
 	}
 }

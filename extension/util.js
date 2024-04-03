@@ -522,6 +522,30 @@ function toggleExclude(key, callback) {
   }
 }
 
+/**
+ * Set Visibility of Excluded Pattern
+ * This function get the exclude items keys and make only them visible
+ * @param {string} keysToShow
+ * @param {function} callback
+ */
+function setExcludeVisible(keysToShow, callback) {
+  if (!keysToShow) {
+    return false
+  }
+
+  const excludes = vscode.workspace.getConfiguration().get('files.exclude', vscode.ConfigurationTarget.Workspace) || {}
+
+  for (let key in keysToShow) {
+    key = keysToShow[key].split('|')[0]
+    // Set visability status
+    if (key && Object.prototype.hasOwnProperty.call(excludes, key)) {
+      logger(`Set: OFF | ${key}`, 'debug')
+      excludes[key] = false
+      updateConfig(excludes, callback)
+    }
+  }
+}
+
 module.exports = {
   deleteExclude,
   disableAll,
@@ -535,4 +559,5 @@ module.exports = {
   saveContext,
   toggleAll,
   toggleExclude,
+  setExcludeVisible,
 }

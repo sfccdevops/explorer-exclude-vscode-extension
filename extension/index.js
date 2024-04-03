@@ -123,6 +123,32 @@ function activate(context) {
     })
   })
 
+  /*
+        This command will show a quick pick of all the excluded items
+        and allow the user to select which ones they want to show.
+    */
+  const showSelected = vscode.commands.registerCommand('explorer-exclude.showSelected', async () => {
+    util.logger('Toggle All Selected Excludes: Visible', 'debug')
+    const excludedItems = util.getExcludes()
+    const selectedExcluded = await vscode.window.showQuickPick(excludedItems, {
+      placeHolder: 'Select Excluded Files/Folders to Show',
+      canPickMany: true,
+    })
+    /*
+        First we need to enable all the excludes (Make everything hidden)
+        */
+    util.enableAll(function () {
+      /*
+        Then we need to set the selected excludes to visible
+        */
+      util.setExcludeVisible(selectedExcluded, function () {})
+
+      setTimeout(function () {
+        pane.update(util.getExcludes())
+      }, timeout * 10)
+    })
+  })
+
   // Set Initial State of Extension
   vscode.commands.executeCommand('setContext', 'explorer-exclude.enabled', true)
   vscode.commands.executeCommand('setContext', 'explorer-exclude.hasLoaded', true)
@@ -143,6 +169,8 @@ function activate(context) {
   context.subscriptions.push(toggle)
   context.subscriptions.push(toggleAllOff)
   context.subscriptions.push(toggleAllOn)
+
+  context.subscriptions.push(showSelected)
 }
 
 /**

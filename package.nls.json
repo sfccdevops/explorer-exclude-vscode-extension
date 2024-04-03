@@ -12,6 +12,7 @@
     "extension.title": "Explorer Exclude",
     "package.disableAll": "Disable All",
     "package.enableAll": "Enable All",
+    "package.select": "Explorer Exclude: Show Selected",
     "package.exclude": "Add to Hidden Items ...",
     "package.loading": "Loading Hidden Items ...",
     "package.pane": "Hidden Items",
