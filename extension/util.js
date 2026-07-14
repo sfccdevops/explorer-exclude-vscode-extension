@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const util = require('util')
 const vscode = require('vscode')
 
 const { init, localize } = require('vscode-nls-i18n')
@@ -123,7 +122,7 @@ const ifExists = (_path) => {
   }
   return new Promise((res, rej) => {
     fs.access(_path, (error) => {
-      if (util.isNullOrUndefined(error)) {
+      if (error === null || error === undefined) {
         res(true)
       } else {
         rej(error)
@@ -137,7 +136,7 @@ const ifExists = (_path) => {
  * @param {string} _path
  */
 const isUnavailable = (_path) => {
-  return util.isNullOrUndefined(_path) || _path === ''
+  return _path === null || _path === undefined || _path === ''
 }
 
 /**
