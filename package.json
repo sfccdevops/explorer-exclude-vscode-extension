@@ -48,6 +48,7 @@
   ],
   "activationEvents": [
     "onCommand:explorer-exclude.disableAll",
+    "onCommand:explorer-exclude.addToExcludes",
     "onCommand:explorer-exclude.enableAll",
     "onCommand:explorer-exclude.enabled",
     "onCommand:explorer-exclude.exclude",
@@ -56,6 +57,7 @@
     "onCommand:explorer-exclude.remove",
     "onCommand:explorer-exclude.reset",
     "onCommand:explorer-exclude.toggle",
+    "onCommand:explorer-exclude.toggleGroupExpansion",
     "onCommand:explorer-exclude.toggleAllOff",
     "onCommand:explorer-exclude.toggleAllOn",
     "onStartupFinished",
@@ -112,6 +114,10 @@
         "title": "%package.exclude%"
       },
       {
+        "command": "explorer-exclude.addToExcludes",
+        "title": "%package.addToExcludes%"
+      },
+      {
         "command": "explorer-exclude.remove",
         "title": "%package.remove%"
       },
@@ -120,9 +126,18 @@
         "title": "%package.toggle%"
       },
       {
+        "command": "explorer-exclude.toggleGroupExpansion",
+        "title": "%package.toggleGroupExpansion%",
+        "category": "Explorer Exclude",
+        "icon": {
+          "dark": "extension/resources/dark/expand-collapse.svg",
+          "light": "extension/resources/light/expand-collapse.svg"
+        }
+      },
+      {
         "command": "explorer-exclude.toggleAllOn",
         "title": "%package.toggle%",
-        "category": "ExplorerExclude",
+        "category": "Explorer Exclude",
         "icon": {
           "dark": "extension/resources/dark/toggle-on.svg",
           "light": "extension/resources/light/toggle-on.svg"
@@ -131,7 +146,7 @@
       {
         "command": "explorer-exclude.toggleAllOff",
         "title": "%package.toggle%",
-        "category": "ExplorerExclude",
+        "category": "Explorer Exclude",
         "icon": {
           "dark": "extension/resources/dark/toggle-off.svg",
           "light": "extension/resources/light/toggle-off.svg"
@@ -140,7 +155,7 @@
       {
         "command": "explorer-exclude.disableAll",
         "title": "%package.disableAll%",
-        "category": "ExplorerExclude",
+        "category": "Explorer Exclude",
         "icon": {
           "dark": "extension/resources/dark/unchecked.svg",
           "light": "extension/resources/light/unchecked.svg"
@@ -149,7 +164,7 @@
       {
         "command": "explorer-exclude.enableAll",
         "title": "%package.enableAll%",
-        "category": "ExplorerExclude",
+        "category": "Explorer Exclude",
         "icon": {
           "dark": "extension/resources/dark/checked.svg",
           "light": "extension/resources/light/checked.svg"
@@ -158,7 +173,7 @@
       {
         "command": "explorer-exclude.reset",
         "title": "%package.reset%",
-        "category": "ExplorerExclude",
+        "category": "Explorer Exclude",
         "icon": {
           "dark": "extension/resources/dark/reset.svg",
           "light": "extension/resources/light/reset.svg"
@@ -167,7 +182,7 @@
       {
         "command": "explorer-exclude.openSettings",
         "title": "%command.openSettings.title%",
-        "category": "ExplorerExclude",
+        "category": "Explorer Exclude",
         "icon": {
           "dark": "extension/resources/dark/settings.svg",
           "light": "extension/resources/light/settings.svg"
@@ -177,7 +192,7 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "explorer-exclude.exclude",
+          "command": "explorer-exclude.addToExcludes",
           "group": "explorer-exclude@1",
           "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && activeViewlet == 'workbench.view.explorer'"
         }
@@ -186,47 +201,45 @@
         {
           "command": "explorer-exclude.remove",
           "group": "explorer-exclude@1",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem && viewItem != '**/.git' && viewItem != '**/.svn'&& viewItem != '**/.hg'&& viewItem != '**/CVS'&& viewItem != '**/.DS_Store' && viewItem != '**/Thumbs.db' && viewItem != '**/*.git'"
-        }
-      ],
-      "view/title": [
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem == removable"
+        },
         {
           "command": "explorer-exclude.disableAll",
-          "group": "navigation@10",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+          "group": "inline@1",
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
           "command": "explorer-exclude.enableAll",
-          "group": "navigation@11",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
-        },
-        {
-          "command": "explorer-exclude.toggleAllOn",
-          "group": "navigation@12",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && !explorer-exclude.enabled"
+          "group": "inline@2",
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
           "command": "explorer-exclude.toggleAllOff",
-          "group": "navigation@12",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && explorer-exclude.enabled"
+          "group": "inline@3",
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem == group-files"
+        },
+        {
+          "command": "explorer-exclude.toggleGroupExpansion",
+          "group": "inline@4",
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
           "command": "explorer-exclude.reset",
-          "group": "navigation@13",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+          "group": "inline@5",
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
           "command": "explorer-exclude.openSettings",
-          "group": "navigation@14",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items"
+          "group": "inline@6",
+          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
         }
       ]
     }
   },
   "scripts": {
     "test": "npm run -s test:lint && npm run -s test:unit",
-    "test:unit": "echo 'No Unit Tests'",
-    "test:lint": "eslint --ext .js ./extension --fix && echo '\n【ツ】CODE PERFECTION !!!\n'"
+    "test:unit": "node test/run.js",
+    "test:lint": "eslint --ext .js ./extension"
   },
   "dependencies": {
     "jsonc-parser": "^3.1.0",
