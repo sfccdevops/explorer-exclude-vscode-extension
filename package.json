@@ -22,7 +22,6 @@
     "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues"
   },
   "homepage": "https://github.com/sfccdevops/explorer-exclude-vscode-extension",
-  "preview": true,
   "qna": false,
   "engines": {
     "vscode": "^1.110.0"

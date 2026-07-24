@@ -1,8 +1,6 @@
-.agents/
 .github/
 .vscode/
 node_modules/
-.npm-cache/
 test/
 *.vsix
 *.code-workspace
@@ -13,5 +11,3 @@ test/
 .nvmrc
 package-lock.json
 DEVELOPERS.md
-explorer-exclude-maintenance-handoff.md
-**/explorer-exclude-maintenance-handoff.md
