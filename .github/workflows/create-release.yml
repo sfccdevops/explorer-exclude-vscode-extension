@@ -36,9 +36,25 @@ jobs:
       - name: Package VSIX
         run: npm run package
 
+      - name: Extract release notes
+        run: |
+          node <<'NODE'
+          const fs = require('fs')
+          const version = require('./package.json').version
+          const changelog = fs.readFileSync('CHANGELOG.md', 'utf8')
+          const section = changelog.slice(changelog.indexOf(`v${version}`))
+          const nextVersion = section.search(/\nv\d+\.\d+\.\d+/)
+
+          if (!section || nextVersion === -1) {
+            throw new Error(`Missing CHANGELOG entry for v${version}`)
+          }
+
+          fs.writeFileSync('release-notes.md', `${section.slice(0, nextVersion).trim()}\n`)
+          NODE
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v3
         with:
           name: Explorer Exclude Manager ${{ github.ref_name }}
-          body: See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)
+          body_path: release-notes.md
           files: "*.vsix"
