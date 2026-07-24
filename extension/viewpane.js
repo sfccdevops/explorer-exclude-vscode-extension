@@ -80,7 +80,7 @@ class ViewPane {
       const collapsibleState = node.type === 'category' && !node.expanded ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.Expanded
       const treeItem = new vscode.TreeItem(label, collapsibleState)
       if (node.type === 'category') {
-        treeItem.id = `explorer-exclude.${node.mode}.${node.labelKey}.${node.expanded ? 'expanded' : 'collapsed'}`
+        treeItem.id = `explorer-exclude-manager.${node.mode}.${node.labelKey}.${node.expanded ? 'expanded' : 'collapsed'}`
       }
       treeItem.description = localize('view.itemCount', node.children.length)
       if (node.type === 'group') {
@@ -95,7 +95,7 @@ class ViewPane {
     treeItem.contextValue = node.scope === 'workspace' ? 'removable' : 'global'
     treeItem.tooltip = node.enabled ? localize('tooltip.show', node.value) : localize('tooltip.hide', node.value)
     treeItem.command = {
-      command: 'explorer-exclude.toggle',
+      command: 'explorer-exclude-manager.toggle',
       title: node.value,
       arguments: [node],
     }

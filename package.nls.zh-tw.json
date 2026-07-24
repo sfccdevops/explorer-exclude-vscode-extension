@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0}不存在",
     "error.parseFilePath": "{0}不可用",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "檔案排除",
     "excludeType.search": "搜尋排除",
     "view.category.global": "全域",

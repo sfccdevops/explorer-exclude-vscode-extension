@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0} non esiste",
     "error.parseFilePath": "{0} non è disponibile",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "Esclusioni file",
     "excludeType.search": "Esclusioni di ricerca",
     "view.category.global": "Globale",

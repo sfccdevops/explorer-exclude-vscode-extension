@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0} mevcut değil",
     "error.parseFilePath": "{0} mevcut değil",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "Dosya hariç tutmaları",
     "excludeType.search": "Arama hariç tutmaları",
     "view.category.global": "Genel",

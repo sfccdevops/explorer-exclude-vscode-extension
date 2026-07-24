@@ -172,19 +172,19 @@ test('shows the visibility action only for File Excludes', () => {
   const searchOperations = groupActions.filter((item) => item.when.includes('viewItem == group-search')).map((item) => item.command)
 
   assert.deepStrictEqual(fileOperations, [
-    'explorer-exclude.disableAll',
-    'explorer-exclude.enableAll',
-    'explorer-exclude.toggleAllOff',
-    'explorer-exclude.toggleGroupExpansion',
-    'explorer-exclude.reset',
-    'explorer-exclude.openSettings',
+    'explorer-exclude-manager.disableAll',
+    'explorer-exclude-manager.enableAll',
+    'explorer-exclude-manager.toggleAllOff',
+    'explorer-exclude-manager.toggleGroupExpansion',
+    'explorer-exclude-manager.reset',
+    'explorer-exclude-manager.openSettings',
   ])
   assert.deepStrictEqual(searchOperations, [
-    'explorer-exclude.disableAll',
-    'explorer-exclude.enableAll',
-    'explorer-exclude.toggleGroupExpansion',
-    'explorer-exclude.reset',
-    'explorer-exclude.openSettings',
+    'explorer-exclude-manager.disableAll',
+    'explorer-exclude-manager.enableAll',
+    'explorer-exclude-manager.toggleGroupExpansion',
+    'explorer-exclude-manager.reset',
+    'explorer-exclude-manager.openSettings',
   ])
   assert.deepStrictEqual(
     groupActions
@@ -197,8 +197,8 @@ test('shows the visibility action only for File Excludes', () => {
 test('offers an expansion action for each exclusion group', () => {
   const root = path.join(__dirname, '..')
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
-  const command = manifest.contributes.commands.find((item) => item.command === 'explorer-exclude.toggleGroupExpansion')
-  const menu = manifest.contributes.menus['view/item/context'].find((item) => item.command === 'explorer-exclude.toggleGroupExpansion')
+  const command = manifest.contributes.commands.find((item) => item.command === 'explorer-exclude-manager.toggleGroupExpansion')
+  const menu = manifest.contributes.menus['view/item/context'].find((item) => item.command === 'explorer-exclude-manager.toggleGroupExpansion')
 
   assert.ok(command)
   assert.ok(menu.when.includes('viewItem == group-files'))

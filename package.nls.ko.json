@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0}이 (가) 존재하지 않습니다.",
     "error.parseFilePath": "{0}을 (를) 사용할 수 없습니다.",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "파일 제외",
     "excludeType.search": "검색 제외",
     "view.category.global": "전역",

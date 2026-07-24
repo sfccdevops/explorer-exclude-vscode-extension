@@ -1,10 +1,10 @@
 {
-  "name": "explorer-exclude",
-  "displayName": "Explorer Exclude",
-  "version": "1.3.2",
-  "description": "Explorer Exclude lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
+  "name": "explorer-exclude-manager",
+  "displayName": "Explorer Exclude Manager",
+  "version": "1.4.0",
+  "description": "Hide and manage Explorer and Search exclusions from the VS Code context menu.",
   "license": "MIT",
-  "publisher": "PeterSchmalfeldt",
+  "publisher": "MadCatPX",
   "categories": [
     "Other"
   ],
@@ -21,9 +21,11 @@
   "bugs": {
     "url": "https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues"
   },
+  "homepage": "https://github.com/sfccdevops/explorer-exclude-vscode-extension",
+  "preview": true,
+  "qna": false,
   "engines": {
-    "vscode": "^1.60.0",
-    "node": "^14.19.0"
+    "vscode": "^1.110.0"
   },
   "keywords": [
     "context-menu",
@@ -39,27 +41,20 @@
     "toggle",
     "workspace"
   ],
-  "contributors": [
-    {
-      "name": "Peter Schmalfeldt",
-      "email": "me@peterschmalfeldt.com",
-      "url": "https://peterschmalfeldt.com"
-    }
-  ],
   "activationEvents": [
-    "onCommand:explorer-exclude.disableAll",
-    "onCommand:explorer-exclude.addToExcludes",
-    "onCommand:explorer-exclude.enableAll",
-    "onCommand:explorer-exclude.enabled",
-    "onCommand:explorer-exclude.exclude",
-    "onCommand:explorer-exclude.hasLoaded",
-    "onCommand:explorer-exclude.missingWorkspace",
-    "onCommand:explorer-exclude.remove",
-    "onCommand:explorer-exclude.reset",
-    "onCommand:explorer-exclude.toggle",
-    "onCommand:explorer-exclude.toggleGroupExpansion",
-    "onCommand:explorer-exclude.toggleAllOff",
-    "onCommand:explorer-exclude.toggleAllOn",
+    "onCommand:explorer-exclude-manager.disableAll",
+    "onCommand:explorer-exclude-manager.addToExcludes",
+    "onCommand:explorer-exclude-manager.enableAll",
+    "onCommand:explorer-exclude-manager.enabled",
+    "onCommand:explorer-exclude-manager.exclude",
+    "onCommand:explorer-exclude-manager.hasLoaded",
+    "onCommand:explorer-exclude-manager.missingWorkspace",
+    "onCommand:explorer-exclude-manager.remove",
+    "onCommand:explorer-exclude-manager.reset",
+    "onCommand:explorer-exclude-manager.toggle",
+    "onCommand:explorer-exclude-manager.toggleGroupExpansion",
+    "onCommand:explorer-exclude-manager.toggleAllOff",
+    "onCommand:explorer-exclude-manager.toggleAllOn",
     "onStartupFinished",
     "onView:extension"
   ],
@@ -68,7 +63,7 @@
       {
         "title": "%extension.title%",
         "properties": {
-          "explorerExclude.backup": {
+          "explorerExcludeManager.backup": {
             "order": 1,
             "type": [
               "object",
@@ -78,7 +73,7 @@
             "description": "%config.properties.backup%",
             "scope": "window"
           },
-          "explorerExclude.showPicker": {
+          "explorerExcludeManager.showPicker": {
             "order": 2,
             "type": "boolean",
             "default": true,
@@ -91,98 +86,98 @@
     "views": {
       "explorer": [
         {
-          "id": "explorerExclude.pane.items",
+          "id": "explorerExcludeManager.pane.items",
           "name": "%package.pane%"
         }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "explorerExclude.pane.items",
+        "view": "explorerExcludeManager.pane.items",
         "contents": "%package.loading%",
-        "when": "!explorer-exclude.missingWorkspace && !explorer-exclude.hasLoaded"
+        "when": "!explorer-exclude-manager.missingWorkspace && !explorer-exclude-manager.hasLoaded"
       },
       {
-        "view": "explorerExclude.pane.items",
+        "view": "explorerExcludeManager.pane.items",
         "contents": "%debug.logger.missingWorkspace%",
-        "when": "explorer-exclude.missingWorkspace"
+        "when": "explorer-exclude-manager.missingWorkspace"
       }
     ],
     "commands": [
       {
-        "command": "explorer-exclude.exclude",
+        "command": "explorer-exclude-manager.exclude",
         "title": "%package.exclude%"
       },
       {
-        "command": "explorer-exclude.addToExcludes",
+        "command": "explorer-exclude-manager.addToExcludes",
         "title": "%package.addToExcludes%"
       },
       {
-        "command": "explorer-exclude.remove",
+        "command": "explorer-exclude-manager.remove",
         "title": "%package.remove%"
       },
       {
-        "command": "explorer-exclude.toggle",
+        "command": "explorer-exclude-manager.toggle",
         "title": "%package.toggle%"
       },
       {
-        "command": "explorer-exclude.toggleGroupExpansion",
+        "command": "explorer-exclude-manager.toggleGroupExpansion",
         "title": "%package.toggleGroupExpansion%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/expand-collapse.svg",
           "light": "extension/resources/light/expand-collapse.svg"
         }
       },
       {
-        "command": "explorer-exclude.toggleAllOn",
+        "command": "explorer-exclude-manager.toggleAllOn",
         "title": "%package.toggle%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/toggle-on.svg",
           "light": "extension/resources/light/toggle-on.svg"
         }
       },
       {
-        "command": "explorer-exclude.toggleAllOff",
+        "command": "explorer-exclude-manager.toggleAllOff",
         "title": "%package.toggle%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/toggle-off.svg",
           "light": "extension/resources/light/toggle-off.svg"
         }
       },
       {
-        "command": "explorer-exclude.disableAll",
+        "command": "explorer-exclude-manager.disableAll",
         "title": "%package.disableAll%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/unchecked.svg",
           "light": "extension/resources/light/unchecked.svg"
         }
       },
       {
-        "command": "explorer-exclude.enableAll",
+        "command": "explorer-exclude-manager.enableAll",
         "title": "%package.enableAll%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/checked.svg",
           "light": "extension/resources/light/checked.svg"
         }
       },
       {
-        "command": "explorer-exclude.reset",
+        "command": "explorer-exclude-manager.reset",
         "title": "%package.reset%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/reset.svg",
           "light": "extension/resources/light/reset.svg"
         }
       },
       {
-        "command": "explorer-exclude.openSettings",
+        "command": "explorer-exclude-manager.openSettings",
         "title": "%command.openSettings.title%",
-        "category": "Explorer Exclude",
+        "category": "Explorer Exclude Manager",
         "icon": {
           "dark": "extension/resources/dark/settings.svg",
           "light": "extension/resources/light/settings.svg"
@@ -192,46 +187,46 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "explorer-exclude.addToExcludes",
-          "group": "explorer-exclude@1",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && activeViewlet == 'workbench.view.explorer'"
+          "command": "explorer-exclude-manager.addToExcludes",
+          "group": "explorer-exclude-manager@1",
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && activeViewlet == 'workbench.view.explorer'"
         }
       ],
       "view/item/context": [
         {
-          "command": "explorer-exclude.remove",
-          "group": "explorer-exclude@1",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem == removable"
+          "command": "explorer-exclude-manager.remove",
+          "group": "explorer-exclude-manager@1",
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && viewItem == removable"
         },
         {
-          "command": "explorer-exclude.disableAll",
+          "command": "explorer-exclude-manager.disableAll",
           "group": "inline@1",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
-          "command": "explorer-exclude.enableAll",
+          "command": "explorer-exclude-manager.enableAll",
           "group": "inline@2",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
-          "command": "explorer-exclude.toggleAllOff",
+          "command": "explorer-exclude-manager.toggleAllOff",
           "group": "inline@3",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && viewItem == group-files"
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && viewItem == group-files"
         },
         {
-          "command": "explorer-exclude.toggleGroupExpansion",
+          "command": "explorer-exclude-manager.toggleGroupExpansion",
           "group": "inline@4",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
-          "command": "explorer-exclude.reset",
+          "command": "explorer-exclude-manager.reset",
           "group": "inline@5",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && (viewItem == group-files || viewItem == group-search)"
         },
         {
-          "command": "explorer-exclude.openSettings",
+          "command": "explorer-exclude-manager.openSettings",
           "group": "inline@6",
-          "when": "explorer-exclude.hasLoaded && !explorer-exclude.missingWorkspace && view == explorerExclude.pane.items && (viewItem == group-files || viewItem == group-search)"
+          "when": "explorer-exclude-manager.hasLoaded && !explorer-exclude-manager.missingWorkspace && view == explorerExcludeManager.pane.items && (viewItem == group-files || viewItem == group-search)"
         }
       ]
     }
@@ -239,7 +234,8 @@
   "scripts": {
     "test": "npm run -s test:lint && npm run -s test:unit",
     "test:unit": "node test/run.js",
-    "test:lint": "eslint --ext .js ./extension"
+    "test:lint": "eslint --ext .js ./extension",
+    "package": "vsce package --githubBranch develop"
   },
   "dependencies": {
     "jsonc-parser": "^3.1.0",
@@ -247,6 +243,7 @@
     "vscode-nls-i18n": "^0.2.4"
   },
   "devDependencies": {
+    "@vscode/vsce": "^3.6.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",

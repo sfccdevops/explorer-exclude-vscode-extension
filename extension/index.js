@@ -19,12 +19,12 @@ async function activate(context) {
   util.saveContext(context)
 
   const timeout = 25
-  const pane = new ViewPane('explorerExclude.pane.items')
+  const pane = new ViewPane('explorerExcludeManager.pane.items')
   const refreshPane = () => pane.update(util.getAllExcludes())
   const getModeId = (node) => (node && node.mode ? node.mode : 'files')
 
   // Get Extension Version Info
-  const currentVersion = context.globalState.get('explorer-exclude.version')
+  const currentVersion = context.globalState.get('explorer-exclude-manager.version')
   const packageVersion = require('../package.json').version
 
   await util.migrateLegacySettings()
@@ -33,14 +33,14 @@ async function activate(context) {
   // Check if there was a recent change to installed version
   if (currentVersion !== packageVersion) {
     // Update version number so we don't show this again until next update
-    context.globalState.update('explorer-exclude.version', packageVersion)
+    context.globalState.update('explorer-exclude-manager.version', packageVersion)
 
     // Show Welcome Modal since this is a new version or install
     const welcome = new WelcomePane()
     welcome.show()
   }
 
-  const disableAll = vscode.commands.registerCommand('explorer-exclude.disableAll', (node) => {
+  const disableAll = vscode.commands.registerCommand('explorer-exclude-manager.disableAll', (node) => {
     util.logger('Disable All Excludes', 'debug')
     util.disableAll(function () {
       setTimeout(function () {
@@ -49,7 +49,7 @@ async function activate(context) {
     }, getModeId(node))
   })
 
-  const enableAll = vscode.commands.registerCommand('explorer-exclude.enableAll', (node) => {
+  const enableAll = vscode.commands.registerCommand('explorer-exclude-manager.enableAll', (node) => {
     util.logger('Enable All Excludes', 'debug')
     util.enableAll(function () {
       setTimeout(function () {
@@ -58,7 +58,7 @@ async function activate(context) {
     }, getModeId(node))
   })
 
-  const exclude = vscode.commands.registerCommand('explorer-exclude.exclude', (uri) => {
+  const exclude = vscode.commands.registerCommand('explorer-exclude-manager.exclude', (uri) => {
     util.exclude(
       uri,
       function () {
@@ -70,7 +70,7 @@ async function activate(context) {
     )
   })
 
-  const addToExcludes = vscode.commands.registerCommand('explorer-exclude.addToExcludes', async (uri) => {
+  const addToExcludes = vscode.commands.registerCommand('explorer-exclude-manager.addToExcludes', async (uri) => {
     const modeId = await util.chooseMode()
     if (!modeId) {
       return
@@ -87,8 +87,8 @@ async function activate(context) {
     )
   })
 
-  const openSettings = vscode.commands.registerCommand('explorer-exclude.openSettings', (node) => {
-    util.logger('Opening Explorer Exclude Settings', 'debug')
+  const openSettings = vscode.commands.registerCommand('explorer-exclude-manager.openSettings', (node) => {
+    util.logger('Opening Explorer Exclude Manager Settings', 'debug')
     const mode = util.getMode(getModeId(node))
     vscode.commands.executeCommand('workbench.action.openSettings', mode.settingKey)
     setTimeout(function () {
@@ -96,7 +96,7 @@ async function activate(context) {
     }, 1000)
   })
 
-  const remove = vscode.commands.registerCommand('explorer-exclude.remove', (uri) => {
+  const remove = vscode.commands.registerCommand('explorer-exclude-manager.remove', (uri) => {
     if (uri && uri.value) {
       const value = uri.value
       const key = uri.key || value.substring(0, value.length - 2)
@@ -115,7 +115,7 @@ async function activate(context) {
     }
   })
 
-  const reset = vscode.commands.registerCommand('explorer-exclude.reset', async (node) => {
+  const reset = vscode.commands.registerCommand('explorer-exclude-manager.reset', async (node) => {
     const modeId = getModeId(node)
     const mode = util.getMode(modeId)
     const value = await vscode.window.showInputBox({
@@ -123,7 +123,7 @@ async function activate(context) {
     })
 
     if (typeof value !== 'undefined') {
-      util.logger('Reset Explorer Exclude', 'debug')
+      util.logger('Reset Explorer Exclude Manager', 'debug')
 
       util.reset(function () {
         setTimeout(function () {
@@ -133,7 +133,7 @@ async function activate(context) {
     }
   })
 
-  const toggle = vscode.commands.registerCommand('explorer-exclude.toggle', (uri) => {
+  const toggle = vscode.commands.registerCommand('explorer-exclude-manager.toggle', (uri) => {
     util.toggleExclude(uri, function () {
       setTimeout(function () {
         refreshPane()
@@ -141,11 +141,11 @@ async function activate(context) {
     })
   })
 
-  const toggleGroupExpansion = vscode.commands.registerCommand('explorer-exclude.toggleGroupExpansion', (node) => {
+  const toggleGroupExpansion = vscode.commands.registerCommand('explorer-exclude-manager.toggleGroupExpansion', (node) => {
     pane.toggleGroupExpansion(getModeId(node))
   })
 
-  const toggleAllOff = vscode.commands.registerCommand('explorer-exclude.toggleAllOff', (node) => {
+  const toggleAllOff = vscode.commands.registerCommand('explorer-exclude-manager.toggleAllOff', (node) => {
     util.logger('Toggle All Excludes: OFF', 'debug')
     util.toggleAll(function () {
       setTimeout(function () {
@@ -154,7 +154,7 @@ async function activate(context) {
     }, getModeId(node))
   })
 
-  const toggleAllOn = vscode.commands.registerCommand('explorer-exclude.toggleAllOn', (node) => {
+  const toggleAllOn = vscode.commands.registerCommand('explorer-exclude-manager.toggleAllOn', (node) => {
     util.logger('Toggle All Excludes: ON', 'debug')
     util.toggleAll(function () {
       setTimeout(function () {
@@ -164,7 +164,7 @@ async function activate(context) {
   })
 
   // Set Initial State of Extension
-  vscode.commands.executeCommand('setContext', 'explorer-exclude.hasLoaded', true)
+  vscode.commands.executeCommand('setContext', 'explorer-exclude-manager.hasLoaded', true)
 
   // Initialize Hidden Items Pane
   refreshPane()
@@ -187,7 +187,7 @@ async function activate(context) {
  * Handle Deactivating Extension
  */
 function deactivate() {
-  vscode.commands.executeCommand('setContext', 'explorer-exclude.enabled', false)
+  vscode.commands.executeCommand('setContext', 'explorer-exclude-manager.enabled', false)
 }
 
 module.exports = {

@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0} не съществува",
     "error.parseFilePath": "{0} не е налице",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "Изключения на файлове",
     "excludeType.search": "Изключения при търсене",
     "view.category.global": "Глобални",

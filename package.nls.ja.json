@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0}は存在しません",
     "error.parseFilePath": "{0}は利用できません",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "ファイルの除外",
     "excludeType.search": "検索の除外",
     "view.category.global": "グローバル",

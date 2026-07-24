@@ -8,7 +8,7 @@ const excludeConfig = require('./exclude-config')
 const { init, localize } = require('vscode-nls-i18n')
 
 // Create custom Output Channel to Log Helpful Messages
-const output = vscode.window.createOutputChannel('Explorer Exclude')
+const output = vscode.window.createOutputChannel('Explorer Exclude Manager')
 
 // Setup Workspace Variables
 let workspace = vscode.workspace.rootPath
@@ -103,8 +103,8 @@ const getWorkspace = (context) => {
     const message = localize('debug.logger.missingWorkspace')
     logger(localize('debug.logger.error', 'getWorkspace', message), 'error')
 
-    vscode.commands.executeCommand('setContext', 'explorer-exclude.missingWorkspace', true)
-    vscode.commands.executeCommand('setContext', 'explorer-exclude.hasLoaded', true)
+    vscode.commands.executeCommand('setContext', 'explorer-exclude-manager.missingWorkspace', true)
+    vscode.commands.executeCommand('setContext', 'explorer-exclude-manager.hasLoaded', true)
   }
 
   // Debug Cartridge Path
@@ -225,7 +225,7 @@ async function initializeState() {
 
   const filesMode = excludeConfig.getMode('files')
   if (context.workspaceState.get(filesMode.backupKey) === undefined) {
-    const inspection = vscode.workspace.getConfiguration().inspect('explorerExclude.backup')
+    const inspection = vscode.workspace.getConfiguration().inspect('explorerExcludeManager.backup')
     const legacyBackup = inspection && inspection.workspaceValue
     if (legacyBackup && Object.keys(legacyBackup).length > 0) {
       await setBackup(filesMode.id, legacyBackup)
@@ -359,7 +359,7 @@ function exclude(uri, callback, modeId = 'files') {
       let selections
       let options = []
 
-      let _showPicker = vscode.workspace.getConfiguration().get('explorerExclude.showPicker', vscode.ConfigurationTarget.Workspace)
+      let _showPicker = vscode.workspace.getConfiguration().get('explorerExcludeManager.showPicker', vscode.ConfigurationTarget.Workspace)
       if (typeof _showPicker == 'undefined') {
         _showPicker = true
       }
@@ -526,8 +526,8 @@ function reset(callback, modeId = 'files') {
 async function migrateLegacySettings() {
   const configuration = vscode.workspace.getConfiguration()
   const settings = [
-    ['explorerExclude.backup', 'explorerExclude.backup'],
-    ['explorerExclude.showPicker', 'explorerExclude.showPicker'],
+    ['explorerExclude.backup', 'explorerExcludeManager.backup'],
+    ['explorerExclude.showPicker', 'explorerExcludeManager.showPicker'],
   ]
   const targets = [
     ['globalValue', vscode.ConfigurationTarget.Global],

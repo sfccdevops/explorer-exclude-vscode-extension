@@ -9,7 +9,7 @@
     "debug.logger.workspace": "\nWorkspace: {0}",
     "error.ifExists": "{0} nem létezik",
     "error.parseFilePath": "{0} nem érhető el",
-    "extension.title": "Explorer Exclude",
+    "extension.title": "Explorer Exclude Manager",
     "excludeType.files": "Fájlkizárások",
     "excludeType.search": "Keresési kizárások",
     "view.category.global": "Globális",
