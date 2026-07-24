@@ -3,6 +3,15 @@ Change Log
 
 > Here's our record of all notable changes made to to this project
 
+v1.4.0 (unreleased)
+---
+
+* Continue the original Explorer Exclude project as Explorer Exclude Manager under the MadCatPX Marketplace publisher
+* Add separate File Excludes and Search Excludes groups with Global and Workspace rule visibility
+* Preserve conditional exclusion values and workspace overrides when toggling, enabling, disabling, or resetting rules
+* Add automatic migration for explicit Explorer Exclude extension settings
+* Prepare manual VSIX packaging for tag-triggered GitHub Releases without Marketplace auto-publishing
+
 v1.3.2
 ---
 
