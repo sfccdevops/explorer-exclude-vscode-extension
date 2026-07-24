@@ -10,7 +10,7 @@ class WelcomePane {
   show() {
     fs.readFile(util.getResourcePath('welcome.html'), function (err, html) {
       if (!err) {
-        const panel = vscode.window.createWebviewPanel('explorerExclude', 'welcome', vscode.ViewColumn.One, {})
+        const panel = vscode.window.createWebviewPanel('explorerExcludeManager', 'welcome', vscode.ViewColumn.One, {})
 
         const README = fs.readFileSync(util.getRootPath('README.md'), 'utf8')
         const CHANGELOG = fs.readFileSync(util.getRootPath('CHANGELOG.md'), 'utf8')
@@ -22,7 +22,7 @@ class WelcomePane {
         welcomePage = welcomePage.replace('{{CHANGELOG}}', marked(CHANGELOG))
         welcomePage = welcomePage.replace('{{TROUBLESHOOTING}}', marked(TROUBLESHOOTING))
 
-        panel.title = 'Explorer Exclude Welcome'
+        panel.title = 'Explorer Exclude Manager Welcome'
         panel.webview.html = welcomePage
       }
     })

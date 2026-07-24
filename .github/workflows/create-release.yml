@@ -1,25 +1,60 @@
-name: Create Release
+name: Package Extension Release
+
 on:
   push:
     tags:
       - 'v*'
+
+permissions:
+  contents: write
+
 jobs:
-  release:
-    if: startsWith(github.ref, 'refs/tags/')
+  package:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Release
-        uses: actions/create-release@v1
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{steps.github_release.outputs.changelog}}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify release version
+        run: |
+          package_version=$(node -p "require('./package.json').version")
+          lockfile_version=$(node -p "require('./package-lock.json').version")
+          tag_version="${GITHUB_REF_NAME#v}"
+          test "$package_version" = "$tag_version"
+          test "$lockfile_version" = "$tag_version"
+
+      - name: Package VSIX
+        run: npm run package
+
+      - name: Extract release notes
+        run: |
+          node <<'NODE'
+          const fs = require('fs')
+          const version = require('./package.json').version
+          const changelog = fs.readFileSync('CHANGELOG.md', 'utf8')
+          const section = changelog.slice(changelog.indexOf(`v${version}`))
+          const nextVersion = section.search(/\nv\d+\.\d+\.\d+/)
+
+          if (!section || nextVersion === -1) {
+            throw new Error(`Missing CHANGELOG entry for v${version}`)
+          }
+
+          fs.writeFileSync('release-notes.md', `${section.slice(0, nextVersion).trim()}\n`)
+          NODE
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Explorer Exclude Manager ${{ github.ref_name }}
+          body_path: release-notes.md
+          files: "*.vsix"

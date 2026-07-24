@@ -3,6 +3,16 @@ Change Log
 
 > Here's our record of all notable changes made to to this project
 
+v1.4.0
+---
+
+* Continue the original Explorer Exclude project as [Explorer Exclude Manager](https://marketplace.visualstudio.com/items?itemName=MadCatPX.explorer-exclude-manager) under a new Marketplace publishing identity.
+* Add separate File Excludes and Search Excludes groups with clear visibility into Global and Workspace rules.
+* Preserve conditional exclusion values and workspace overrides when toggling, enabling, disabling, or resetting exclusion rules.
+* Automatically migrate explicitly configured settings from the previous explorerExclude.* namespace to explorerExcludeManager.*.
+* Fix the util.isNullOrUndefined is not a function error that prevented the extension from working on newer VS Code versions ( [#66](https://github.com/sfccdevops/explorer-exclude-vscode-extension/issues/66)).
+* Remove the Marketplace Preview designation for the stable release.
+
 v1.3.2
 ---
 
