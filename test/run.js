@@ -164,6 +164,22 @@ test('keeps every NLS file aligned with the English keys', () => {
   })
 })
 
+test('activates when the Hidden Items view is opened', () => {
+  const root = path.join(__dirname, '..')
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
+  const view = manifest.contributes.views.explorer.find((item) => item.id === 'explorerExcludeManager.pane.items')
+
+  assert.ok(view)
+  assert.ok(manifest.activationEvents.includes(`onView:${view.id}`))
+})
+
+test('does not exclude runtime dependencies from the VSIX', () => {
+  const root = path.join(__dirname, '..')
+  const ignoreRules = fs.readFileSync(path.join(root, '.vscodeignore'), 'utf8').split(/\r?\n/)
+
+  assert.ok(!ignoreRules.includes('node_modules/'))
+})
+
 test('shows the visibility action only for File Excludes', () => {
   const root = path.join(__dirname, '..')
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
@@ -218,4 +234,3 @@ test('replaces category identity when a group expansion is toggled', () => {
   assert.strictEqual(expanded.collapsibleState, vscode.TreeItemCollapsibleState.Expanded)
   assert.notStrictEqual(collapsedByDefault.id, expanded.id)
 })
-

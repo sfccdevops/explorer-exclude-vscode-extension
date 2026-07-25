@@ -1,6 +1,5 @@
 .github/
 .vscode/
-node_modules/
 test/
 *.vsix
 *.code-workspace
