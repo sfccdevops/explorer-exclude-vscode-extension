@@ -1,7 +1,7 @@
 {
   "name": "explorer-exclude-manager",
   "displayName": "Explorer Exclude Manager",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Hide and manage Explorer and Search exclusions from the VS Code context menu.",
   "license": "MIT",
   "publisher": "MadCatPX",
