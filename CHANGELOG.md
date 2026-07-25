@@ -3,7 +3,7 @@ Change Log
 
 > Here's our record of all notable changes made to to this project
 
-v1.4.0
+v1.4.1
 ---
 
 * Continue the original Explorer Exclude project as [Explorer Exclude Manager](https://marketplace.visualstudio.com/items?itemName=MadCatPX.explorer-exclude-manager) under a new Marketplace publishing identity.

@@ -55,6 +55,6 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v3
         with:
-          name: Explorer Exclude Manager ${{ github.ref_name }}
+          name: Version ${{ github.ref_name }}
           body_path: release-notes.md
           files: "*.vsix"
