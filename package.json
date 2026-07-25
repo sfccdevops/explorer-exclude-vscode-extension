@@ -55,7 +55,7 @@
     "onCommand:explorer-exclude-manager.toggleAllOff",
     "onCommand:explorer-exclude-manager.toggleAllOn",
     "onStartupFinished",
-    "onView:extension"
+    "onView:explorerExcludeManager.pane.items"
   ],
   "contributes": {
     "configuration": [
